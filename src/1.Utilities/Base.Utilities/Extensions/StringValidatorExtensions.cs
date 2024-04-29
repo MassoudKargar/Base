@@ -8,7 +8,7 @@ public static class StringValidatorExtensions
     /// <summary>
     /// صحت سنجی کد ملی
     /// </summary>
-    /// <param name="input">کد ملی</param>
+    /// <param name="nationalCode">کد ملی</param>
     /// <returns>درست یا غلط</returns>
     public static bool IsNationalCode(this string nationalCode)
     {
@@ -118,36 +118,36 @@ public static class StringValidatorExtensions
         return false;
     }
 
-    public static bool IsLengthBetween(this string input, int minLength, int maxLenght)
+    public static bool IsLengthBetween(this string input, int minLength, int maxLength)
     {
-        if (input.Length <= maxLenght && input.Length >= minLength)
+        if (input.Length <= maxLength && input.Length >= minLength)
             return true;
         return false;
     }
 
-    public static bool IsLengthLessThan(this string input, int lenght)
+    public static bool IsLengthLessThan(this string input, int length)
     {
-        return input.Length < lenght;
+        return input.Length < length;
     }
 
-    public static bool IsLengthLessThanOrEqual(this string input, int lenght)
+    public static bool IsLengthLessThanOrEqual(this string input, int length)
     {
-        return input.Length <= lenght;
+        return input.Length <= length;
     }
 
-    public static bool IsLengthGreaterThan(this string input, int lenght)
+    public static bool IsLengthGreaterThan(this string input, int length)
     {
-        return input.Length > lenght;
+        return input.Length > length;
     }
 
-    public static bool IsLengthGreaterThanOrEqual(this string input, int lenght)
+    public static bool IsLengthGreaterThanOrEqual(this string input, int length)
     {
-        return input.Length >= lenght;
+        return input.Length >= length;
     }
 
-    public static bool IsLengthEqual(this string input, int lenght)
+    public static bool IsLengthEqual(this string input, int length)
     {
-        return input.Length == lenght;
+        return input.Length == length;
     }
 
 
