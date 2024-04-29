@@ -3,11 +3,13 @@ using Base.Core.Domain.Entities;
 using Base.Core.Domain.ValueObjects;
 
 namespace Base.Core.Contracts.Data.Commands;
+
 /// <summary>
 /// در صورتی که داده‌ها به صورت عادی ذخیره سازی شوند از این Interface جهت تعیین اعمال اصلی موجود در بخش ذخیره سازی داده‌ها استفاده می‌شود.
 /// </summary>
 /// <typeparam name="TEntity">کلاسی که جهت ذخیره سازی انتخاب می‌شود</typeparam>
-public interface ICommandRepository<TEntity, TId> : IUnitOfWork
+/// <typeparam name="TId"></typeparam>
+public interface ICommandRepository<TEntity, in TId> : IUnitOfWork
     where TEntity : AggregateRoot<TId>
      where TId : struct,
           IComparable,
