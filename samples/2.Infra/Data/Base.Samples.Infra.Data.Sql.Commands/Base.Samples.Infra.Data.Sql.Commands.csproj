@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\3.Infra\Data\Base.Infra.Data.Sql.Commands\Base.Infra.Data.Sql.Commands.csproj" />
+    <ProjectReference Include="..\..\..\1.Core\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
