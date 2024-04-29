@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Base.Core.Domain\Base.Core.Domain.csproj" />
-    <ProjectReference Include="..\Base.Core.RequestResponse\Base.Core.RequestResponse.csproj" />
-  </ItemGroup>
-
 </Project>
