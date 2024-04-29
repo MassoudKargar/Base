@@ -1,6 +1,6 @@
-﻿using Zamin.Core.RequestResponse.Common;
+﻿using Base.Core.RequestResponse.Common;
 
-namespace Zamin.Core.RequestResponse.Commands;
+namespace Base.Core.RequestResponse.Commands;
 /// <summary>
 /// نتیجه انجام هر عملیات به کمک این کلاس بازگشت داده می‌شود.
 /// دلایل استفاده از این الگو و پیاده سازی کاملی از این الگو را در لینک زیر می‌توانید مشاهده کنید

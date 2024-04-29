@@ -6,7 +6,7 @@ namespace Base.Core.Contracts.ApplicationServices.Queries;
 /// </summary>
 /// <typeparam name="TQuery">نوع کوئری و پارامتر‌های ورودی را تعیین می‌کند</typeparam>
 /// <typeparam name="TData">نوع داده‌های بازگشتی را تعیین می‌کند</typeparam>
-public interface IQueryHandler<TQuery, TData>
+public interface IQueryHandler<in TQuery, TData>
     where TQuery : class, IQuery<TData>
 {
     Task<QueryResult<TData>> Handle(TQuery request);
