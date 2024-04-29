@@ -1,6 +1,11 @@
 @Base.Samples.EndPoints.WebApi_HostAddress = http://localhost:5019
 
-GET {{Base.Samples.EndPoints.WebApi_HostAddress}}/weatherforecast/
+GET {{Base.Samples.EndPoints.WebApi_HostAddress}}/api/People/CheckValueObject?firstName=masoud
+Accept: application/json
+
+###
+
+GET {{Base.Samples.EndPoints.WebApi_HostAddress}}/api/People/ExceptionCheck
 Accept: application/json
 
 ###

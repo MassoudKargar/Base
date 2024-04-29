@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\3.Infra\Data\Base.Infra.Data.Sql.Command\Base.Infra.Data.Sql.Commands.csproj" />
+    <ProjectReference Include="..\..\3.Infra\Data\Base.Infra.Data.Sql.Commands\Base.Infra.Data.Sql.Commands.csproj" />
     <ProjectReference Include="..\..\3.Infra\Data\Base.Infra.Data.Sql.Queries\Base.Infra.Data.Sql.Queries.csproj" />
   </ItemGroup>
 
