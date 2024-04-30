@@ -1,15 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<Version>8.0.0</Version>
+		<Authors>Masoud kargar</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<PackageIcon>base.png</PackageIcon>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\2.Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domain.Toolkits.csproj" />
-    <ProjectReference Include="..\Base.Infra.Data.Sql\Base.Infra.Data.Sql.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="base.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\2.Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domain.Toolkits.csproj" />
+		<ProjectReference Include="..\Base.Infra.Data.Sql\Base.Infra.Data.Sql.csproj" />
+	</ItemGroup>
 
 </Project>
