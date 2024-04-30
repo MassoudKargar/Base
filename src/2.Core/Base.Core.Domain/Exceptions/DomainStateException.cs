@@ -10,7 +10,7 @@ public abstract class DomainStateException(string message, params string[] param
     /// List of error parameters
     /// If there is a parameter, send the message as a template and the values of the parameters are placed in a special place in the template.
     /// </summary>
-    private string[] Parameters { get; } = parameters;
+    public string[] Parameters { get; } = parameters;
 
     public override string ToString()
     {
