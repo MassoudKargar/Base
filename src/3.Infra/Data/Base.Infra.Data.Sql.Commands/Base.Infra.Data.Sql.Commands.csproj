@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\2.Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domain.Toolkits.csproj" />
     <ProjectReference Include="..\Base.Infra.Data.Sql\Base.Infra.Data.Sql.csproj" />
   </ItemGroup>
 
