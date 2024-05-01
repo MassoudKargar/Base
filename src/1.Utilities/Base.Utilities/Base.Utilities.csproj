@@ -17,12 +17,12 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-		<PackageReference Include="Zamin.Extensions.Caching.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Logger.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.ObjectMappers.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Translations.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Caching.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.Logger.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.ObjectMappers.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Translations.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 </Project>
