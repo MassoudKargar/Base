@@ -1,0 +1,6 @@
+@Base.Extensions.Translations.Parrot.Sample_HostAddress = http://localhost:5250
+
+GET {{Base.Extensions.Translations.Parrot.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,6 @@
+@Base.Extensions.Caching.Distributed.Redis.Sample_HostAddress = http://localhost:5286
+
+GET {{Base.Extensions.Caching.Distributed.Redis.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

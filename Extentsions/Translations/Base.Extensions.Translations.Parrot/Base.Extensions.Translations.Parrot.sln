@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Extensions.Translations.Parrot", "Base.Extensions.Translations.Parrot\Base.Extensions.Translations.Parrot.csproj", "{07406606-7738-4C4E-88C2-9D59D965EFBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Extensions.Translations.Parrot.Sample", "Base.Extensions.Translations.Parrot.Sample\Base.Extensions.Translations.Parrot.Sample.csproj", "{88DBAF31-B6F5-4A09-84B7-CC67E6D05F71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07406606-7738-4C4E-88C2-9D59D965EFBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07406606-7738-4C4E-88C2-9D59D965EFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07406606-7738-4C4E-88C2-9D59D965EFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07406606-7738-4C4E-88C2-9D59D965EFBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88DBAF31-B6F5-4A09-84B7-CC67E6D05F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88DBAF31-B6F5-4A09-84B7-CC67E6D05F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88DBAF31-B6F5-4A09-84B7-CC67E6D05F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88DBAF31-B6F5-4A09-84B7-CC67E6D05F71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65F86FA0-413B-40DC-B456-C5E983B9D34B}
+	EndGlobalSection
+EndGlobal

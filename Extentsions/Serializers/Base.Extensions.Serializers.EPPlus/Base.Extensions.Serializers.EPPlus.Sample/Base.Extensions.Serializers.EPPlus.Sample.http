@@ -1,0 +1,6 @@
+@Base.Extensions.Serializers.EPPlus.Sample_HostAddress = http://localhost:5275
+
+GET {{Base.Extensions.Serializers.EPPlus.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
