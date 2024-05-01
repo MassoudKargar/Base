@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Extensions.ObjectMappers.AutoMapper", "Base.Extensions.ObjectMappers.AutoMapper\Base.Extensions.ObjectMappers.AutoMapper.csproj", "{393312B5-8062-47B6-A097-E5C40E646D24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Extensions.ObjectMappers.AutoMapper.Sample", "Base.Extensions.ObjectMappers.AutoMapper.Sample\Base.Extensions.ObjectMappers.AutoMapper.Sample.csproj", "{1961C922-DC07-4304-AF15-A87CDDFA20BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{393312B5-8062-47B6-A097-E5C40E646D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393312B5-8062-47B6-A097-E5C40E646D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393312B5-8062-47B6-A097-E5C40E646D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393312B5-8062-47B6-A097-E5C40E646D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1961C922-DC07-4304-AF15-A87CDDFA20BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1961C922-DC07-4304-AF15-A87CDDFA20BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1961C922-DC07-4304-AF15-A87CDDFA20BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1961C922-DC07-4304-AF15-A87CDDFA20BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8EB8A2C-EC96-4252-8673-DC2A6DA3C352}
+	EndGlobalSection
+EndGlobal
