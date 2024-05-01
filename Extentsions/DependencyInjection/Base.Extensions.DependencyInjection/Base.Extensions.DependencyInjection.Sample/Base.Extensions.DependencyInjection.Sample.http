@@ -1,0 +1,6 @@
+@Base.Extensions.DependencyInjection.Sample_HostAddress = http://localhost:5183
+
+GET {{Base.Extensions.DependencyInjection.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
