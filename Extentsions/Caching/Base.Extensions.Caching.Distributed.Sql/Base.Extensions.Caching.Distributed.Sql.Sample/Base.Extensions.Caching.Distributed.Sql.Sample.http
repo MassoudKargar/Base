@@ -1,0 +1,6 @@
+@Base.Extensions.Caching.Distributed.Sql.Sample_HostAddress = http://localhost:5192
+
+GET {{Base.Extensions.Caching.Distributed.Sql.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

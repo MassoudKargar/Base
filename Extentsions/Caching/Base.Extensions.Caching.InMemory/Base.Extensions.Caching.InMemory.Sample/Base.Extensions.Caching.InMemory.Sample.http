@@ -1,0 +1,6 @@
+@Base.Extensions.Caching.InMemory.Sample_HostAddress = http://localhost:5232
+
+GET {{Base.Extensions.Caching.InMemory.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

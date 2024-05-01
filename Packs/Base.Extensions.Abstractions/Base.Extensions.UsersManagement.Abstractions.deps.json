@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Base.Extensions.UsersManagement.Abstractions/8.0.0": {
+        "runtime": {
+          "Base.Extensions.UsersManagement.Abstractions.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Base.Extensions.UsersManagement.Abstractions/8.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
