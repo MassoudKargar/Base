@@ -1,0 +1,6 @@
+@Base.Extensions.Serializers.NewtonSoft.Sample_HostAddress = http://localhost:5250
+
+GET {{Base.Extensions.Serializers.NewtonSoft.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

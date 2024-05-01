@@ -1,0 +1,6 @@
+@Base.Extensions.Serializers.Microsoft.Sample_HostAddress = http://localhost:5223
+
+GET {{Base.Extensions.Serializers.Microsoft.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
