@@ -1,0 +1,6 @@
+@Base.Extensions.UsersManagement.Sample.Api_HostAddress = http://localhost:5006
+
+GET {{Base.Extensions.UsersManagement.Sample.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
