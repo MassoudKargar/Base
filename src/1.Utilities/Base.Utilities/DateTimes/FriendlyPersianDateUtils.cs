@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Base.Utilities.DateTimes;
+﻿namespace Base.Utility.DateTimes;
 /// <summary>
 /// نمایش دوستانه‌ی یک تاریخ و ساعت انگلیسی به شمسی
 /// </summary>

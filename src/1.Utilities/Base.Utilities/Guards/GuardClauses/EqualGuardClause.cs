@@ -1,4 +1,6 @@
-namespace Base.Utilities.Guards.GuardClauses;
+using Base.Utility.Resources;
+
+namespace Base.Utility.Guards.GuardClauses;
 
 public static class EqualGuardClause
 {

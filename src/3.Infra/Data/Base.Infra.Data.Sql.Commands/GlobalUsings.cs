@@ -1,12 +1,12 @@
 // Global using directives
 
 global using Base.Core.Contracts.Data.Commands;
-global using Base.Core.Domain.Entities;
-global using Base.Core.Domain.Toolkits.ValueObjects;
-global using Base.Core.Domain.ValueObjects;
+global using Base.Core.Domains.Entities;
+global using Base.Core.Domains.Toolkits.ValueObjects;
+global using Base.Core.Domains.ValueObjects;
 global using Base.Infra.Data.Sql.Commands.Extensions;
 global using Base.Infra.Data.Sql.Commands.ValueConversions;
-global using Base.Utilities.Extensions;
+global using Base.Utility.Extensions;
 
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -21,5 +21,5 @@ global using System.Data;
 global using System.Data.Common;
 global using System.Globalization;
 global using System.Linq.Expressions;
-
-global using Zamin.Extensions.UsersManagement.Abstractions;
+global using Base.Extensions.UsersManagement.Abstractions;
+global using Base.Extensions.UsersManagement.Abstractions;

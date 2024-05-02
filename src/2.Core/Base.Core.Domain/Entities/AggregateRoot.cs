@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Base.Core.Domain.Events;
-
-namespace Base.Core.Domain.Entities;
+﻿namespace Base.Core.Domains.Entities;
 /// <summary>
 /// Implement the AggregateRoot template
 /// You can see the full description of this pattern at the address below

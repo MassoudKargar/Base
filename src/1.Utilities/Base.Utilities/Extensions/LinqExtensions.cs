@@ -1,8 +1,4 @@
-﻿using System.Data;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace Base.Utilities.Extensions;
+﻿namespace Base.Utility.Extensions;
 
 public static class LinqExtensions
 {

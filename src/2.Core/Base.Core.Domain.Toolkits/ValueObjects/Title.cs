@@ -1,7 +1,4 @@
-﻿using Base.Core.Domain.Exceptions;
-using Base.Core.Domain.ValueObjects;
-
-namespace Base.Core.Domain.Toolkits.ValueObjects;
+﻿namespace Base.Core.Domains.Toolkits.ValueObjects;
 public class Title : BaseValueObject<Title>
 {
     #region Properties
@@ -27,7 +24,6 @@ public class Title : BaseValueObject<Title>
 
     }
     #endregion
-
 
     #region Equality Check
     protected override IEnumerable<object> GetEqualityComponents()

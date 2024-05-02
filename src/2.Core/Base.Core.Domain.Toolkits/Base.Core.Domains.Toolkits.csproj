@@ -8,14 +8,18 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>base.png</PackageIcon>
 	</PropertyGroup>
-
 	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="base.png" Pack="true" PackagePath="" />
 	</ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\1.Utilities\Base.Utilities\Base.Utilities.csproj" />
+    <ProjectReference Include="..\..\1.Utilities\Base.Utilities\Base.Utility.csproj" />
+    <ProjectReference Include="..\Base.Core.Domain\Base.Core.Domains.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
-﻿using Base.Core.RequestResponse.Commands;
-
-namespace Base.Core.Contracts.ApplicationServices.Commands;
+﻿namespace Base.Core.Contracts.ApplicationServices.Commands;
 /// <summary>
 /// تعریف ساختار برای مدیریت دستورات. پیاده سازی الگوی Mediator
 /// از این الگو جهت کاهش پیچیدگی صدا زدن دستورات استفاده می‌شود

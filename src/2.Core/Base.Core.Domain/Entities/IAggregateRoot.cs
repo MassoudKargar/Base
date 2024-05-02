@@ -1,6 +1,4 @@
-﻿using Base.Core.Domain.Events;
-
-namespace Base.Core.Domain.Entities;
+﻿namespace Base.Core.Domains.Entities;
 
 public interface IAggregateRoot
 {

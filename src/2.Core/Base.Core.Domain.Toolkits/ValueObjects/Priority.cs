@@ -1,7 +1,4 @@
-﻿using Base.Core.Domain.Exceptions;
-using Base.Core.Domain.ValueObjects;
-
-namespace Base.Core.Domain.Toolkits.ValueObjects;
+﻿namespace Base.Core.Domains.Toolkits.ValueObjects;
 public class Priority : BaseValueObject<Priority>
 {
     #region Properties

@@ -1,6 +1,4 @@
-﻿using Base.Core.Domain.ValueObjects;
-
-namespace Base.Core.Domain.Entities;
+﻿namespace Base.Core.Domains.Entities;
 /// <summary>
 /// Base class for all entities in the system
 /// </summary>

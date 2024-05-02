@@ -1,6 +1,4 @@
-﻿using Base.Core.Domain.Events;
-
-namespace Base.Core.Contracts.Data.Commands;
+﻿namespace Base.Core.Contracts.Data.Commands;
 /// <summary>
 /// در صورت نیاز به ذخیره و بازیابی eventها از این اینترفیس استفاده می‌شود.
 /// </summary>

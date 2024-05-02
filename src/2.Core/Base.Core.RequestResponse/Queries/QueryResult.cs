@@ -1,6 +1,4 @@
-﻿using Base.Core.RequestResponse.Common;
-
-namespace Base.Core.RequestResponse.Queries;
+﻿namespace Base.Core.RequestResponse.Queries;
 
 /// <summary>
 /// نتیجه یک کوئری را بازگشت می‌دهد

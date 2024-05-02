@@ -1,4 +1,4 @@
-﻿namespace Base.Core.Domain.Exceptions;
+﻿namespace Base.Core.Domains.Exceptions;
 /// <summary>
 /// Domain layer errors related to Entities and ValueObjects are sent to higher layers with the help of Extension
 /// Considering that both Entity and ValueObject send the error in the same way, an Exception class has been designed and implemented.

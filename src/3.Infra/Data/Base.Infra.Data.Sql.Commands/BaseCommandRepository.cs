@@ -32,10 +32,6 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
             _dbContext.Set<TEntity>().Remove(entity);
     }
 
-
-
-
-
     #region insert
 
     public void Insert(TEntity entity)

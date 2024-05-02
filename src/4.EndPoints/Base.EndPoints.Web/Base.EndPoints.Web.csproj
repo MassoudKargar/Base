@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
@@ -8,12 +7,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>base.png</PackageIcon>
 	</PropertyGroup>
-
 	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="base.png" Pack="true" PackagePath="" />
-	</ItemGroup> 
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.4" />
@@ -26,9 +27,12 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\1.Utilities\Base.Utilities\Base.Utility.csproj" />
     <ProjectReference Include="..\..\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\3.Infra\Data\Base.Infra.Data.Sql.Commands\Base.Infra.Data.Sql.Commands.csproj" />
-    <ProjectReference Include="..\..\3.Infra\Data\Base.Infra.Data.Sql.Queries\Base.Infra.Data.Sql.Queries.csproj" />
+    <ProjectReference Include="..\..\2.Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domains.Toolkits.csproj" />
+    <ProjectReference Include="..\..\2.Core\Base.Core.Domain\Base.Core.Domains.csproj" />
+    <ProjectReference Include="..\..\2.Core\Base.Core.RequestResponse\Base.Core.RequestResponse.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Base.Core.Domain.Entities;
+﻿namespace Base.Core.Domains.Entities;
 
 public interface IAuditableEntity
 {

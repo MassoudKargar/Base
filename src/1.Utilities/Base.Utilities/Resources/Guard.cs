@@ -1,4 +1,4 @@
-﻿namespace Base.Utilities.Guards;
+﻿namespace Base.Utility.Resources;
 
 public class Guard
 {

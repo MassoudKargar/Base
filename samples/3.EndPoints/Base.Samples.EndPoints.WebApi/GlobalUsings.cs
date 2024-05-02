@@ -22,10 +22,6 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.OpenApi.Models;
 
-global using Serilog;
 
 global using Swashbuckle.AspNetCore.SwaggerGen;
 global using Swashbuckle.AspNetCore.SwaggerUI;
-
-global using Zamin.Extensions.DependencyInjection;
-global using Zamin.Utilities.SerilogRegistration.Extensions;

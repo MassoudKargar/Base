@@ -1,4 +1,4 @@
-﻿namespace Base.Utilities.DateTimes;
+﻿namespace Base.Utility.DateTimes;
 /// <summary>
 /// DateTimeOffset Part
 /// The source of this section was originally taken from the works of Mr. Vahid Nasiri. After completion and final corrections, addressing etc. will be corrected

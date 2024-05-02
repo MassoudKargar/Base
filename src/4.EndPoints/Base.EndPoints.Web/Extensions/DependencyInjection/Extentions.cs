@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.DependencyModel;
-
-using Zamin.Extensions.DependencyInjection.Abstractions;
-
-namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class Extensions
 {
@@ -19,7 +15,7 @@ public static class Extensions
     {
         return services.AddWithTransientLifetime(assemblies, typeof(ITransientLifetime))
             .AddWithScopedLifetime(assemblies, typeof(IScopeLifetime))
-            .AddWithSingletonLifetime(assemblies, typeof(ISingletoneLifetime));
+            .AddWithSingletonLifetime(assemblies, typeof(ISingletonLifetime));
     }
 
     public static IServiceCollection AddWithTransientLifetime(this IServiceCollection services,

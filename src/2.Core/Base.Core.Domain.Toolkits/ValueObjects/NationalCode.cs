@@ -1,8 +1,4 @@
-﻿using Base.Core.Domain.Exceptions;
-using Base.Core.Domain.ValueObjects;
-using Base.Utilities.Extensions;
-
-namespace Base.Core.Domain.Toolkits.ValueObjects;
+﻿namespace Base.Core.Domains.Toolkits.ValueObjects;
 public class NationalCode : BaseValueObject<NationalCode>
 {
     #region Properties

@@ -1,4 +1,4 @@
-﻿namespace Base.Utilities.Extensions;
+﻿namespace Base.Utility.Extensions;
 
 public static class DateTimeExtensions
 {

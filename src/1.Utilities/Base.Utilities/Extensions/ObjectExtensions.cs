@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Base.Utilities.Extensions;
+﻿namespace Base.Utility.Extensions;
 
 public static class ObjectExtensions
 {

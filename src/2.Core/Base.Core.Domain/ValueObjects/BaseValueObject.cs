@@ -1,4 +1,4 @@
-﻿namespace Base.Core.Domain.ValueObjects;
+﻿namespace Base.Core.Domains.ValueObjects;
 /// <summary>
 /// Base class for all ValueObjects
 /// See the link below for a complete explanation of why ValueObjects exist

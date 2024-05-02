@@ -1,20 +1,19 @@
-﻿namespace Base.Utilities.Extensions
-{
-    public static class TypeExtentsions
-    {
+﻿namespace Base.Utility.Extensions;
 
-        public static bool IsSubclassOfRawGeneric(this Type toCheck, Type generic)
+public static class TypeExtensions
+{
+
+    public static bool IsSubclassOfRawGeneric(this Type toCheck, Type generic)
+    {
+        while (toCheck != null && toCheck != typeof(object))
         {
-            while (toCheck != null && toCheck != typeof(object))
+            var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+            if (generic == cur)
             {
-                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-                if (generic == cur)
-                {
-                    return true;
-                }
-                toCheck = toCheck.BaseType;
+                return true;
             }
-            return false;
+            toCheck = toCheck.BaseType;
         }
+        return false;
     }
 }

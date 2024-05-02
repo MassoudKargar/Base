@@ -15,17 +15,17 @@ public class EventDispatcherValidationDecorator(
     #region Publish Domain Event
     public override async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event)
     {
-        _logger.LogDebug(ZaminEventId.EventValidation, "Validating Event of type {EventType} With value {Event}  start at :{StartDateTime}", @event.GetType(), @event, DateTime.Now);
+        _logger.LogDebug(BaseEventId.EventValidation, "Validating Event of type {EventType} With value {Event}  start at :{StartDateTime}", @event.GetType(), @event, DateTime.Now);
 
         List<string> errorMessages = Validate(@event);
 
         if (errorMessages.Any())
         {
-            _logger.LogInformation(ZaminEventId.EventValidation, "Validating query of type {QueryType} With value {Query}  failed. Validation errors are: {ValidationErrors}", @event.GetType(), @event, errorMessages);
+            _logger.LogInformation(BaseEventId.EventValidation, "Validating query of type {QueryType} With value {Query}  failed. Validation errors are: {ValidationErrors}", @event.GetType(), @event, errorMessages);
         }
         else
         {
-            _logger.LogDebug(ZaminEventId.EventValidation, "Validating query of type {QueryType} With value {Query}  finished at :{EndDateTime}", @event.GetType(), @event, DateTime.Now);
+            _logger.LogDebug(BaseEventId.EventValidation, "Validating query of type {QueryType} With value {Query}  finished at :{EndDateTime}", @event.GetType(), @event, DateTime.Now);
             await _eventDispatcher.PublishDomainEventAsync(@event);
         }
     }
@@ -46,7 +46,7 @@ public class EventDispatcherValidationDecorator(
         }
         else
         {
-            _logger.LogInformation(ZaminEventId.CommandValidation, "There is not any validator for {EventType}", @event.GetType());
+            _logger.LogInformation(BaseEventId.CommandValidation, "There is not any validator for {EventType}", @event.GetType());
         }
 
         return errorMessages;
