@@ -1,4 +1,7 @@
-﻿namespace Base.Samples.EndPoints.WebApi.Extensions;
+﻿using Serilog;
+using Zamin.Extensions.DependencyInjection;
+
+namespace Base.Samples.EndPoints.WebApi.Extensions;
 
 public static class HostingExtensions
 {

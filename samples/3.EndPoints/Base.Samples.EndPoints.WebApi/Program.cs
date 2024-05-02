@@ -1,3 +1,6 @@
+using Zamin.Extensions.DependencyInjection;
+using Zamin.Utilities.SerilogRegistration.Extensions;
+
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);
