@@ -10,11 +10,9 @@ public static class HostingExtensions
     {
         IConfiguration configuration = builder.Configuration;
 
-        //builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
-        //builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
-        //builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
-
-        builder.Services.AddControllers();
+        builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
+        builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
+        builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
 
         //Base
         builder.Services.AddBaseApiCore("Base");
