@@ -5,7 +5,7 @@ public class PeopleController : BaseController
 {
     #region Commands
     [HttpPost("Create")]
-    public async Task<IActionResult> CreatePerson() => Ok();
+    public async Task<IActionResult> CreatePerson([FromBody] CreatePerson command) => await Create<CreatePerson, long>(command);
 
     #endregion
 }
