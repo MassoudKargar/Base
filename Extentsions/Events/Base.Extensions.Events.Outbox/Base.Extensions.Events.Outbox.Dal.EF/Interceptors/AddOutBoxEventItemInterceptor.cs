@@ -1,13 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Diagnostics;
-using Base.Extensions.Events.Abstractions;
-using Base.Extensions.Serializers.Abstractions;
-using Base.Extensions.UsersManagement.Abstractions;
-using Microsoft.EntityFrameworkCore;
-using Base.Core.Domain.Entities;
-
-namespace Base.Extensions.Events.Outbox.Dal.EF.Interceptors;
+﻿namespace Base.Extensions.Events.Outbox.Dal.EF.Interceptors;
 
 public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
 {

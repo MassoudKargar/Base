@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<Version>8.0.0</Version>
+		<Version>8.0.1</Version>
 		<Authors>Masoud kargar</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -19,7 +19,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
-		<PackageReference Include="Base.Extensions.ChangeDataLog.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.ChangeDataLog.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 

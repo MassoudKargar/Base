@@ -1,0 +1,6 @@
+@Base.Extensions.MessageBus.MessageInbox.Sample_HostAddress = http://localhost:5296
+
+GET {{Base.Extensions.MessageBus.MessageInbox.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

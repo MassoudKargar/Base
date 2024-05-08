@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Utility.OpenTelemetryRegistration", "Base.Utility.OpenTelemetryRegistration\Base.Utility.OpenTelemetryRegistration.csproj", "{62378F2B-99A3-405E-A7E3-A6121B60E4BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Utility.OpenTelemetryRegistration.Sample", "Base.Utility.OpenTelemetryRegistration.Sample\Base.Utility.OpenTelemetryRegistration.Sample.csproj", "{1763740D-B3AE-41D5-85BE-A4D008BCDF2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62378F2B-99A3-405E-A7E3-A6121B60E4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62378F2B-99A3-405E-A7E3-A6121B60E4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62378F2B-99A3-405E-A7E3-A6121B60E4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62378F2B-99A3-405E-A7E3-A6121B60E4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1763740D-B3AE-41D5-85BE-A4D008BCDF2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1763740D-B3AE-41D5-85BE-A4D008BCDF2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1763740D-B3AE-41D5-85BE-A4D008BCDF2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1763740D-B3AE-41D5-85BE-A4D008BCDF2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {179647D0-217C-4491-830D-C20E8DDE1E4D}
+	EndGlobalSection
+EndGlobal

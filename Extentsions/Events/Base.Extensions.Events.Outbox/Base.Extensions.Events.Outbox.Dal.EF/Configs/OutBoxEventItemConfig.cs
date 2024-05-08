@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Base.Extensions.Events.Abstractions;
-using Microsoft.EntityFrameworkCore;
-
-namespace Base.Extensions.Events.Outbox.Dal.EF.Configs;
+﻿namespace Base.Extensions.Events.Outbox.Dal.EF.Configs;
 
 public class OutBoxEventItemConfig : IEntityTypeConfiguration<OutBoxEventItem>
 {

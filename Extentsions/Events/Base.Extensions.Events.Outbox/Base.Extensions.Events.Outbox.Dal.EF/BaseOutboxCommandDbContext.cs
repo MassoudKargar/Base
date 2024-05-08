@@ -1,9 +1,4 @@
-﻿using Base.Extensions.Events.Abstractions;
-using Base.Extensions.Events.Outbox.Dal.EF.Configs;
-using Base.Extensions.Events.Outbox.Dal.EF.Interceptors;
-using Base.Infra.Data.Sql.Commands;
-
-namespace Base.Extensions.Events.Outbox.Dal.EF;
+﻿namespace Base.Extensions.Events.Outbox.Dal.EF;
 
 public abstract class BaseOutboxCommandDbContext : BaseCommandDbContext
 {

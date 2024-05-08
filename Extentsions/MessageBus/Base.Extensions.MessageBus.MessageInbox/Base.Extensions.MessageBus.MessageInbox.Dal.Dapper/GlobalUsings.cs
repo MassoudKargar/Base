@@ -1,0 +1,12 @@
+// Global using directives
+
+global using System.Data;
+global using Base.Extensions.MessageBus.Abstractions;
+global using Base.Extensions.MessageBus.MessageInbox.Dal.Dapper;
+global using Base.Extensions.MessageBus.MessageInbox.Dal.Dapper.Options;
+global using Dapper;
+global using Microsoft.Data.SqlClient;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;

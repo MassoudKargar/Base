@@ -1,0 +1,6 @@
+@Base.Extensions.ChangeDataLog.Hamster.Sample_HostAddress = http://localhost:5008
+
+GET {{Base.Extensions.ChangeDataLog.Hamster.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

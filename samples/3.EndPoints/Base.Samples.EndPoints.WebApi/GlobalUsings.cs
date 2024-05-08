@@ -25,3 +25,7 @@ global using Microsoft.OpenApi.Models;
 
 global using Swashbuckle.AspNetCore.SwaggerGen;
 global using Swashbuckle.AspNetCore.SwaggerUI;
+
+namespace Base;
+
+public class BaseClass;

@@ -1,5 +1,7 @@
-﻿namespace Base.Samples.Infra.Data.Sql.Commands.People;
+﻿using Base.Samples.Core.Contracts.People.Commands;
 
-public class PersonCommandRepository(SampleCommandDbContext dbContext) : BaseCommandRepository<Person,SampleCommandDbContext>(dbContext)
+namespace Base.Samples.Infra.Data.Sql.Commands.People;
+
+public class PersonCommandRepository(SampleCommandDbContext dbContext) : BaseCommandRepository<Person, SampleCommandDbContext>(dbContext), IPersonCommandRepository
 {
 }

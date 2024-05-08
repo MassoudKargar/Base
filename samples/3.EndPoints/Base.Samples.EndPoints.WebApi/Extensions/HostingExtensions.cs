@@ -1,5 +1,6 @@
-﻿using Serilog;
-using Zamin.Extensions.DependencyInjection;
+﻿using Base.Extensions.DependencyInjection;
+using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.IdentityServer.Extensions;
+using Serilog;
 
 namespace Base.Samples.EndPoints.WebApi.Extensions;
 
@@ -9,9 +10,11 @@ public static class HostingExtensions
     {
         IConfiguration configuration = builder.Configuration;
 
-        builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
-        builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
-        builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
+        //builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
+        //builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
+        //builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
+
+        builder.Services.AddControllers();
 
         //Base
         builder.Services.AddBaseApiCore("Base");
@@ -19,27 +22,30 @@ public static class HostingExtensions
         //microsoft
         builder.Services.AddEndpointsApiExplorer();
 
-        //zamin
-        builder.Services.AddZaminWebUserInfoService(configuration, "WebUserInfo", true);
+        //
+        builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo", true);
 
-        //zamin
-        builder.Services.AddZaminParrotTranslator(configuration, "ParrotTranslator");
+        //
+        builder.Services.AddBaseParrotTranslator(configuration, "ParrotTranslator");
 
-        //zamin
+        //
         //builder.Services.AddSoftwarePartDetector(configuration, "SoftwarePart");
 
-        //zamin
+        //
         builder.Services.AddNonValidatingValidator();
 
-        //zamin
-        builder.Services.AddZaminMicrosoftSerializer();
+        //
+        builder.Services.AddBaseMicrosoftSerializer();
 
-        //zamin
-        builder.Services.AddZaminAutoMapperProfiles(configuration, "AutoMapper");
+        //
+        builder.Services.AddBaseAutoMapperProfiles(option =>
+        {
+            option.AssemblyNamesForLoadProfiles = "Base";
+        });
 
-        //zamin
-        builder.Services.AddZaminInMemoryCaching();
-        //builder.Services.AddZaminSqlDistributedCache(configuration, "SqlDistributedCache");
+        //
+        builder.Services.AddBaseInMemoryCaching();
+        //builder.Services.AddSqlDistributedCache(configuration, "SqlDistributedCache");
 
         //CommandDbContext
         builder.Services.AddDbContext<SampleCommandDbContext>(
@@ -52,16 +58,16 @@ public static class HostingExtensions
             c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
 
         //PollingPublisher
-        //builder.Services.AddZaminPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
-        //builder.Services.AddZaminPollingPublisher(configuration, "PollingPublisher");
+        //builder.Services.AddPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
+        //builder.Services.AddPollingPublisher(configuration, "PollingPublisher");
 
         //MessageInbox
-        //builder.Services.AddZaminMessageInboxDalSql(configuration, "MessageInboxSqlStore");
-        //builder.Services.AddZaminMessageInbox(configuration, "MessageInbox");
+        //builder.Services.AddMessageInboxDalSql(configuration, "MessageInboxSqlStore");
+        //builder.Services.AddMessageInbox(configuration, "MessageInbox");
 
-        //builder.Services.AddZaminRabbitMqMessageBus(configuration, "RabbitMq");
+        //builder.Services.AddRabbitMqMessageBus(configuration, "RabbitMq");
 
-        //builder.Services.AddZaminTraceJeager(configuration, "OpenTeletmetry");
+        //builder.Services.AddTraceJeager(configuration, "OpenTeletmetry");
 
         //builder.Services.AddIdentityServer(configuration, "OAuth");
 
@@ -93,13 +99,19 @@ public static class HostingExtensions
 
         //app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
-        //var useIdentityServer = app.UseIdentityServer("OAuth");
+        var useIdentityServer = app.UseIdentityServer("OAuth");
 
-        var controllerBuilder = app.MapControllers();
 
-        //if (useIdentityServer)
-        //    controllerBuilder.RequireAuthorization();
+        //app.UseAuthentication();
 
+        if (useIdentityServer)
+        {
+            app.MapControllers().RequireAuthorization();
+        }
+        else
+        {
+            app.MapControllers();
+        }
         //app.Services.GetService<SoftwarePartDetectorService>()?.Run();
 
         return app;

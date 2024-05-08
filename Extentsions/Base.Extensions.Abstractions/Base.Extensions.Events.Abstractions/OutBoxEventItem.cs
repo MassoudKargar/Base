@@ -1,5 +1,5 @@
 ﻿namespace Base.Extensions.Events.Abstractions;
-public abstract class OutBoxEventItem
+public class OutBoxEventItem
 {
     public virtual long OutBoxEventItemId { get; set; }
     public virtual Guid EventId { get; set; }

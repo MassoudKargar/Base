@@ -20,8 +20,8 @@
 
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-		<PackageReference Include="Base.Core.RequestResponse" Version="8.0.0" />
-		<PackageReference Include="Base.Core.Contracts" Version="8.0.0" />
+		<PackageReference Include="Base.Core.RequestResponse" Version="8.0.1" />
+		<PackageReference Include="Base.Core.Contracts" Version="8.0.1" />
 		<PackageReference Include="Base.Extensions.MessageBus.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
 	</ItemGroup>
