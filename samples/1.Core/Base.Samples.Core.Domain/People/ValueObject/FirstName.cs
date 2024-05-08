@@ -8,7 +8,7 @@ public class FirstName : BaseValueObject<FirstName>
     {
         value = value.Trim();
         if (string.IsNullOrEmpty(value)) throw new InvalidValueObjectStateException(Messages.InvalidNullValue,Messages.FirstName);
-        if (value.IsLengthBetween(2,50)) throw new InvalidValueObjectStateException(Messages.InvalidStringLength,Messages.FirstName,"2","50");
+        if (!value.IsLengthBetween(2,50)) throw new InvalidValueObjectStateException(Messages.InvalidStringLength,Messages.FirstName,"2","50");
         
         Value = value;
     }
