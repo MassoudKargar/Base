@@ -2,20 +2,29 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<Version>8.0.0</Version>
+		<Version>8.0.1</Version>
 		<Authors>Masoud kargar</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>base.png</PackageIcon>
 	</PropertyGroup>
-
 	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="base.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+	</ItemGroup>
+
   <ItemGroup>
+    <ProjectReference Include="..\..\1.Utilities\Base.Utilities\Base.Utility.csproj" />
     <ProjectReference Include="..\Base.Core.Contracts\Base.Core.Contracts.csproj" />
+    <ProjectReference Include="..\Base.Core.Domain\Base.Core.Domains.csproj" />
   </ItemGroup>
 
 </Project>

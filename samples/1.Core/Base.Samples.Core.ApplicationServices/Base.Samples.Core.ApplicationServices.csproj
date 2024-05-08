@@ -8,7 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\..\src\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domains.Toolkits.csproj" />
     <ProjectReference Include="..\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj" />
+    <ProjectReference Include="..\Base.Samples.Core.Domain\Base.Samples.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

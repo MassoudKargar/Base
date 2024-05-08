@@ -21,13 +21,13 @@ public class EventDispatcherDomainExceptionHandlerDecorator(
         }
         catch (DomainStateException ex)
         {
-            _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
+            _logger.LogError(BaseEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
         }
         catch (AggregateException ex)
         {
             if (ex.InnerException is DomainStateException domainStateException)
             {
-                _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
+                _logger.LogError(BaseEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
             }
             throw ex;
         }

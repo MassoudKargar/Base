@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace Base.EndPoints.Web.Extensions;
+﻿namespace Base.EndPoints.Web.Extensions;
 
 public static class ClaimExtensions
 {

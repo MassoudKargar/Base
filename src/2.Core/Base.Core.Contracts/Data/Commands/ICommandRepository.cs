@@ -1,8 +1,4 @@
-﻿using System.Linq.Expressions;
-using Base.Core.Domain.Entities;
-using Base.Core.Domain.ValueObjects;
-
-namespace Base.Core.Contracts.Data.Commands;
+﻿namespace Base.Core.Contracts.Data.Commands;
 
 /// <summary>
 /// در صورتی که داده‌ها به صورت عادی ذخیره سازی شوند از این Interface جهت تعیین اعمال اصلی موجود در بخش ذخیره سازی داده‌ها استفاده می‌شود.

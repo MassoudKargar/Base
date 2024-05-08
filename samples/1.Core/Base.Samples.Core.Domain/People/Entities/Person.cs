@@ -1,8 +1,4 @@
-﻿using Base.Core.Domain.Entities;
-using Base.Samples.Core.Domain.People.Events;
-using Base.Samples.Core.Domain.People.ValueObject;
-
-namespace Base.Samples.Core.Domain.People.Entities;
+﻿namespace Base.Samples.Core.Domain.People.Entities;
 
 public class Person : AggregateRoot
 {

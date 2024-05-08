@@ -1,5 +1,5 @@
 ﻿namespace Base.Extensions.ChangeDataLog.Abstractions;
-public abstract class EntityChangeInterceptorItem
+public class EntityChangeInterceptorItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string ContextName { get; set; }

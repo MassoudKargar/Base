@@ -1,0 +1,6 @@
+@Base.Utility.SerilogRegistration.Sample_HostAddress = http://localhost:5182
+
+GET {{Base.Utility.SerilogRegistration.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

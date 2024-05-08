@@ -1,4 +1,4 @@
-﻿namespace Base.Utilities.Resources.Translators;
+﻿namespace Base.Utility.Resources.Translators;
 
 public class TranslatorKeys
 {

@@ -1,0 +1,6 @@
+@Base.Utility.SoftwarePartsDetector.Sample_HostAddress = http://localhost:5123
+
+GET {{Base.Utility.SoftwarePartsDetector.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

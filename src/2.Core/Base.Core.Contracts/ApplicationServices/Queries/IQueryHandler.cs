@@ -1,6 +1,4 @@
-﻿using Base.Core.RequestResponse.Queries;
-
-namespace Base.Core.Contracts.ApplicationServices.Queries;
+﻿namespace Base.Core.Contracts.ApplicationServices.Queries;
 /// <summary>
 /// تعریف ساختار مورد نیاز جهت پردازش یک کورئری
 /// </summary>

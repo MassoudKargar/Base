@@ -1,6 +1,6 @@
-using System.Text.RegularExpressions;
+using Base.Utility.Resources;
 
-namespace Base.Utilities.Guards.GuardClauses;
+namespace Base.Utility.Guards.GuardClauses;
 
 public static class MatchGuardClause
 {

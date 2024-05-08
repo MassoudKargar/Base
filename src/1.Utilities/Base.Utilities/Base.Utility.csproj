@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<Version>8.0.1</Version>
+		<Authors>Masoud kargar</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>base.png</PackageIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath=""/>
+		<None Include="base.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.Caching.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.Logger.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.ObjectMappers.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Translations.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
+	</ItemGroup>
+</Project>

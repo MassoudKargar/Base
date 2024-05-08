@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Base.Utilities.Extensions;
+﻿namespace Base.Utility.Extensions;
 
 public static class StringValidatorExtensions
 {

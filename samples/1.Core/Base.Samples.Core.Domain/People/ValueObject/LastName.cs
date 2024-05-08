@@ -1,7 +1,4 @@
-﻿using Base.Core.Domain.Exceptions;
-using Base.Core.Domain.ValueObjects;
-
-namespace Base.Samples.Core.Domain.People.ValueObject;
+﻿namespace Base.Samples.Core.Domain.People.ValueObject;
 
 public class LastName : BaseValueObject<LastName>
 {

@@ -1,6 +1,4 @@
-﻿using Base.Core.Domain.Exceptions;
-
-namespace Base.Core.Domain.ValueObjects;
+﻿namespace Base.Core.Domains.ValueObjects;
 public class BusinessId : BaseValueObject<BusinessId>
 {
     public static BusinessId FromString(string value) => new(value);

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Utility.Auth.ApiAuthentication", "Base.Utility.Auth.ApiAuthentication\Base.Utility.Auth.ApiAuthentication.csproj", "{73F167BD-5896-4411-87A2-F2501D230B5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Utility.Auth.ApiAuthentication.Sample", "Base.Utility.Auth.ApiAuthentication.Sample\Base.Utility.Auth.ApiAuthentication.Sample.csproj", "{615A8A12-4CD7-4E26-A397-C5116A8889F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73F167BD-5896-4411-87A2-F2501D230B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F167BD-5896-4411-87A2-F2501D230B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F167BD-5896-4411-87A2-F2501D230B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F167BD-5896-4411-87A2-F2501D230B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{615A8A12-4CD7-4E26-A397-C5116A8889F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{615A8A12-4CD7-4E26-A397-C5116A8889F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{615A8A12-4CD7-4E26-A397-C5116A8889F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{615A8A12-4CD7-4E26-A397-C5116A8889F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F23DFAB-ADB6-448F-AA93-03F3B95642CE}
+	EndGlobalSection
+EndGlobal

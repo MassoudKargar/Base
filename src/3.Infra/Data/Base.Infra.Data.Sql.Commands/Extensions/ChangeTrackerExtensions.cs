@@ -2,12 +2,12 @@
 public static class ChangeTrackerExtensions
 {
     public static List<AggregateRoot> GetChangedAggregates(this ChangeTracker changeTracker) =>
-        changeTracker.Aggreates().Where(IsModified()).Select(c => c.Entity).ToList();
+        changeTracker.Aggregates().Where(IsModified()).Select(c => c.Entity).ToList();
 
     public static List<AggregateRoot> GetAggregatesWithEvent(this ChangeTracker changeTracker) =>
-            changeTracker.Aggreates()
+            changeTracker.Aggregates()
                 .Where(IsNotDetached()).Select(c => c.Entity).Where(c => c.GetEvents().Any()).ToList();
-    public static IEnumerable<EntityEntry<AggregateRoot>> Aggreates(this ChangeTracker changeTracker) =>
+    public static IEnumerable<EntityEntry<AggregateRoot>> Aggregates(this ChangeTracker changeTracker) =>
         changeTracker.Entries<AggregateRoot>();
 
     private static Func<EntityEntry<AggregateRoot>, bool> IsNotDetached() =>

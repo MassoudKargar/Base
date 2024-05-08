@@ -1,8 +1,4 @@
-﻿using Base.Samples.Core.Domain.People.Entities;
-using Base.Samples.Core.Domain.People.ValueObject;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Base.Samples.Infra.Data.Sql.Commands.People.Config;
+﻿namespace Base.Samples.Infra.Data.Sql.Commands.People.Config;
 
 public class PersonConfig : IEntityTypeConfiguration<Person>
 {

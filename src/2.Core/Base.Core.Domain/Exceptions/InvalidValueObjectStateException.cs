@@ -1,4 +1,4 @@
-﻿namespace Base.Core.Domain.Exceptions;
+﻿namespace Base.Core.Domains.Exceptions;
 /// <summary>
 /// Errors related to invalid status in ValueObjects are sent by this class
 /// </summary>

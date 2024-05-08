@@ -1,0 +1,6 @@
+@Base.Utility.OpenTelemetryRegistration.Sample_HostAddress = http://localhost:5086
+
+GET {{Base.Utility.OpenTelemetryRegistration.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,8 +1,4 @@
-﻿using Base.Core.Domain.Exceptions;
-using Base.Core.Domain.ValueObjects;
-using Base.Utilities.Extensions;
-
-namespace Base.Core.Domain.Toolkits.ValueObjects;
+﻿namespace Base.Core.Domains.Toolkits.ValueObjects;
 public class LegalNationalId : BaseValueObject<LegalNationalId>
 {
     #region Properties
@@ -40,6 +36,7 @@ public class LegalNationalId : BaseValueObject<LegalNationalId>
     public static explicit operator string(LegalNationalId title) => title.Value;
     public static implicit operator LegalNationalId(string value) => new(value);
     #endregion
+
     #region Methods
     public override string ToString() => Value;
 

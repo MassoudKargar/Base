@@ -23,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Infra", "2.Infra", "{6124
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.EndPoints", "3.EndPoints", "{42B44D85-41D3-4EAF-AFF1-8A46A8C961A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Utilities", "src\1.Utilities\Base.Utilities\Base.Utilities.csproj", "{E0FD0FD3-53C2-4C7D-B651-789011B0271F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Utility", "src\1.Utilities\Base.Utilities\Base.Utility.csproj", "{E0FD0FD3-53C2-4C7D-B651-789011B0271F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.Domain", "src\2.Core\Base.Core.Domain\Base.Core.Domain.csproj", "{2ADDB3E5-5777-4B85-A1CC-29CCBBF9F2E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.Domains", "src\2.Core\Base.Core.Domain\Base.Core.Domains.csproj", "{2ADDB3E5-5777-4B85-A1CC-29CCBBF9F2E8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.ApplicationServices", "src\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj", "{E7380399-0069-4560-85EE-E1BD523B3566}"
 EndProject
@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.Infra.Data.Sql
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.EndPoints.WebApi", "samples\3.EndPoints\Base.Samples.EndPoints.WebApi\Base.Samples.EndPoints.WebApi.csproj", "{C9ED6349-41FF-4EE0-9BDF-D5970B32DAE4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.Domain.Toolkits", "src\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domain.Toolkits.csproj", "{58259464-0B61-445B-AC28-94EF7D262E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.Domains.Toolkits", "src\2.Core\Base.Core.Domain.Toolkits\Base.Core.Domains.Toolkits.csproj", "{58259464-0B61-445B-AC28-94EF7D262E4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.RequestResponse", "src\2.Core\Base.Core.RequestResponse\Base.Core.RequestResponse.csproj", "{53F1F696-0F67-4C30-98F9-0B06996FEA0D}"
 EndProject

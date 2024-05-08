@@ -7,6 +7,7 @@
     <UserSecretsId>f03e0d26-cea1-4e9e-b1cc-fbf973c26eea</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
+	  <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -18,31 +19,37 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
-		<PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Events.PollingPublisher" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox" Version="8.0.1-beta.1" />
-		<PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.MessageBus.RabbitMQ" Version="8.0.1-beta.1" />
-		<PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.UsersManagement" Version="8.0.0" />
-		<PackageReference Include="Zamin.Utilities.OpenTelemetryRegistration" Version="8.0.0-beta.2" />
-		<PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Caching.InMemory" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Events.PollingPublisher" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.MessageBus.RabbitMQ" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Translations.Parrot" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.UsersManagement" Version="8.0.0" />
+		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.0.0" />
+		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
     <ProjectReference Include="..\..\..\src\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\..\src\4.EndPoints\Base.EndPoints.Web\Base.EndPoints.Web.csproj" />
     <ProjectReference Include="..\..\1.Core\Base.Samples.Core.ApplicationServices\Base.Samples.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\1.Core\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\1.Core\Base.Samples.Core.Domain\Base.Samples.Core.Domain.csproj" />
     <ProjectReference Include="..\..\2.Infra\Data\Base.Samples.Infra.Data.Sql.Commands\Base.Samples.Infra.Data.Sql.Commands.csproj" />
     <ProjectReference Include="..\..\2.Infra\Data\Base.Samples.Infra.Data.Sql.Queries\Base.Samples.Infra.Data.Sql.Queries.csproj" />
   </ItemGroup>

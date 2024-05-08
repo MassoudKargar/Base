@@ -1,7 +1,10 @@
+using Base.Extensions.DependencyInjection;
+using Base.Utilities.SerilogRegistration.Extensions;
+
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);
-    var app = builder.AddZaminSerilog(o =>
+    var app = builder.AddBaseSerilog(o =>
     {
         o.ApplicationName = builder.Configuration.GetValue<string>("ApplicationName");
         o.ServiceId = builder.Configuration.GetValue<string>("ServiceId");

@@ -1,4 +1,4 @@
-﻿namespace Base.Utilities.DateTimes;
+﻿namespace Base.Utility.DateTimes;
 /// <summary>
 /// اجزای ماه شمسی
 /// </summary>
