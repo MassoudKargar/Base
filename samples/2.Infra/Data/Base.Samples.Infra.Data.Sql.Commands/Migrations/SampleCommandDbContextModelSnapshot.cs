@@ -57,7 +57,7 @@ namespace Base.Samples.Infra.Data.Sql.Commands.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
                 });
 #pragma warning restore 612, 618
         }
