@@ -3,7 +3,7 @@
   <PropertyGroup>
 	  <TargetFramework>net8.0</TargetFramework>
 	  <Nullable>enable</Nullable>
-	  <Version>8.0.0</Version>
+	  <Version>8.0.8</Version>
 	  <Authors>Masoud kargar</Authors>
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -20,9 +20,9 @@
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.1.35" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Caching.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
