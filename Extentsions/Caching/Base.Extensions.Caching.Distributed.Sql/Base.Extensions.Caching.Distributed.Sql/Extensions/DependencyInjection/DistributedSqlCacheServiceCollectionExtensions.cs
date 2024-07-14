@@ -9,7 +9,6 @@ public static class DistributedSqlCacheServiceCollectionExtensions
 
     public static IServiceCollection AddBaseSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddBaseNewtonSoftSerializer();
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
         services.Configure<DistributedSqlCacheOptions>(configuration);
 
@@ -31,7 +30,6 @@ public static class DistributedSqlCacheServiceCollectionExtensions
     public static IServiceCollection AddBaseSqlDistributedCache(this IServiceCollection services,
                                                             Action<DistributedSqlCacheOptions> setupAction)
     {
-        services.AddBaseNewtonSoftSerializer();
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
         services.Configure(setupAction);
 

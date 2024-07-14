@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddBaseNewtonSoftSerializer();
 builder.Services.AddBaseSqlDistributedCache(options =>
 {
     options.TableName = builder.Configuration["Cache:TableName"] ?? "";
