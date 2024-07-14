@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddBaseNewtonSoftSerializer();
 builder.Services.AddBaseRedisDistributedCache(option =>
 {
     option.Configuration = "localhost:9191,password=M@$0ud100101001";
