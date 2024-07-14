@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
 		<PackageReference Include="Base.Extensions.ChangeDataLog.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
 	</ItemGroup>
