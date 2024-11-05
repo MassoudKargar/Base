@@ -18,6 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
 		  <PrivateAssets>all</PrivateAssets>
@@ -35,7 +36,6 @@
 		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.MessageBus.RabbitMQ" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.1" />
 		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Translations.Parrot" Version="8.0.0" />
