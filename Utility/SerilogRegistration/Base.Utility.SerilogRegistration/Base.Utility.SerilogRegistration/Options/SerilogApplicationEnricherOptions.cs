@@ -1,4 +1,5 @@
 ﻿namespace Base.Utilities.SerilogRegistration.Options;
+
 public class SerilogApplicationEnricherOptions
 {
     public string ApplicationName { get; set; }

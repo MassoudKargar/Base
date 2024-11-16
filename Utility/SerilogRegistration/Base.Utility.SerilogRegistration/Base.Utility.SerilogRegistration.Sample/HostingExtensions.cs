@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using Base.Extensions.DependencyInjection;
 
-namespace Base.Utilities.SerilogRegistration.Sample;
+namespace Base.Utility.SerilogRegistration.Sample;
 
 public static class HostingExtensions
 {
@@ -11,7 +11,7 @@ public static class HostingExtensions
         builder.Services.AddBaseWebUserInfoService(c =>
         {
             c.DefaultUserId = "1";
-        }, true) ;
+        }, true);
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         return builder.Build();
