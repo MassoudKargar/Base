@@ -1,6 +1,8 @@
+using Base.Utility.SerilogRegistration.Sample;
+
 using Microsoft.AspNetCore.Mvc;
 
-namespace Base.Utilities.SerilogRegistration.Sample.Controllers;
+namespace Base.Utility.SerilogRegistration.Sample.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase

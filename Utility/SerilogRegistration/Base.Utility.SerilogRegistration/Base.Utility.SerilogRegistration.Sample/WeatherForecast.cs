@@ -1,4 +1,4 @@
-namespace Base.Utilities.SerilogRegistration.Sample;
+namespace Base.Utility.SerilogRegistration.Sample;
 
 public class WeatherForecast
 {

@@ -3,7 +3,7 @@ using Serilog.Core;
 using Serilog.Events;
 using Base.Utilities.SerilogRegistration.Options;
 
-namespace Base.Utilities.SerilogRegistration.Sample.SampleEnrichers;
+namespace Base.Utility.SerilogRegistration.Sample.SampleEnrichers;
 
 public class Sample02Enricher : ILogEventEnricher
 {

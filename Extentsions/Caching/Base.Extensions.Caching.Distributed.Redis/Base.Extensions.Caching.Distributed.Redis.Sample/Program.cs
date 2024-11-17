@@ -8,7 +8,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddBaseNewtonSoftSerializer();
 builder.Services.AddBaseRedisDistributedCache(option =>
 {
-    option.Configuration = "localhost:9191,password=M@$0ud100101001";
+    option.Configuration = "localhost:6379,password=N<01!rt9Ptry-1";
     option.InstanceName = "Base.Sample.";
 });
 
