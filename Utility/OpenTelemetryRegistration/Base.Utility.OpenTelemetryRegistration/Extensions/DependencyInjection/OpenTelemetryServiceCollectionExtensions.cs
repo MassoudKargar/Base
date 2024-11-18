@@ -1,71 +1,122 @@
-﻿namespace Base.Extensions.DependencyInjection;
+﻿using OpenTelemetry;
+using OpenTelemetry.Logs;
+namespace Base.Extensions.DependencyInjection;
 public static class OpenTelemetryServiceCollectionExtensions
 {
-    public static IServiceCollection AddBaseObservabilitySupport(this IServiceCollection services, IConfiguration configuration)
+    public static WebApplicationBuilder AddObservability(this WebApplicationBuilder builder)
     {
+        var configuration = builder.Configuration;
 
-        services.Configure<OpenTelemetryOptions>(configuration);
-        RegisterTraceServices(services);
-        RegisterMetricService(services);
-        return services;
-    }
+        OpenTelemetryOptions observabilityOptions = new();
 
-    public static IServiceCollection AddBaseObservabilitySupport(this IServiceCollection services, IConfiguration configuration, string sectionName)
-    {
-        services.AddBaseObservabilitySupport(configuration.GetSection(sectionName));
-        return services;
-    }
-
-    public static IServiceCollection AddBaseObservabilitySupport(this IServiceCollection services, Action<OpenTelemetryOptions> setupAction)
-    {
-        services.Configure(setupAction);
-        RegisterTraceServices(services);
-        RegisterMetricService(services);
-        return services;
-    }
-
-    private static IServiceCollection RegisterTraceServices(IServiceCollection services)
-    {
-        var serviceProvider = services.BuildServiceProvider();
-        var options = serviceProvider.GetRequiredService<IOptions<OpenTelemetryOptions>>().Value;
-
-        services.AddOpenTelemetry()
-            .WithTracing(tracerProviderBuilder =>
+        var config = configuration.GetValue<OpenTelemetryOptions>(nameof(OpenTelemetryOptions));
+        if (config == null)
+        {
+            observabilityOptions = new OpenTelemetryOptions
             {
-                string serviceName = $"{options.ApplicationName}.{options.ServiceName}";
-                tracerProviderBuilder
-                .SetResourceBuilder(ResourceBuilder.CreateDefault()
-                        .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
-                .AddHttpClientInstrumentation()
-                .AddAspNetCoreInstrumentation()
-                .AddSqlClientInstrumentation()
-                .AddEntityFrameworkCoreInstrumentation()
-                .SetSampler(new TraceIdRatioBasedSampler(options.SamplingProbability))
-                .AddOtlpExporter(oltpOptions =>
-                {
-                    oltpOptions.Endpoint = new Uri(options.OltpEndpoint);
-                    oltpOptions.ExportProcessorType = options.ExportProcessorType;
-                });
-            });
-        return services;
+                ApplicationName = "Base",
+                ServiceName = "OpenTelemetrySample",
+                ServiceVersion = "1.0.0",
+                ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98",
+                OltpEndpoint = "http://localhost:4317",
+                ExportProcessorType = ExportProcessorType.Simple,
+                SamplingProbability = 1
+            };
+
+        }
+        else
+        {
+            configuration
+                .GetRequiredSection(nameof(OpenTelemetryOptions))
+                .Bind(observabilityOptions);
+        }
+        builder.Services
+            .AddOpenTelemetry()
+            .ConfigureResource(resource => resource.AddService(observabilityOptions.ServiceName))
+            .AddMetrics(observabilityOptions)
+            .AddTracing(observabilityOptions)
+            .AddLogging(observabilityOptions);
+
+        return builder;
     }
-
-
-
-    public static IServiceCollection RegisterMetricService(this IServiceCollection services)
+    private static OpenTelemetryBuilder AddLogging(this OpenTelemetryBuilder builder, OpenTelemetryOptions observabilityOptions)
     {
-        var serviceProvider = services.BuildServiceProvider();
-        var options = serviceProvider.GetRequiredService<IOptions<OpenTelemetryOptions>>().Value;
 
-        services.AddOpenTelemetry().WithMetrics(opts => opts
-                    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(options.ApplicationName))
-                    .AddMeter(options.ApplicationName)
-                    .AddRuntimeInstrumentation()
-                    .AddPrometheusExporter());
+        builder.WithLogging(logging =>
+        {
+            logging
+            .AddOtlpExporter(_ =>
+            {
+                _.Endpoint = new Uri(observabilityOptions.OltpEndpoint);
+                _.ExportProcessorType = ExportProcessorType.Batch;
+                _.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+            });
+        });
+        return builder;
 
-        services.AddSingleton(new MetricReporter(options.ApplicationName, options.ServiceName));
-        return services;
     }
+
+
+
+
+    private static OpenTelemetryBuilder AddTracing(this OpenTelemetryBuilder builder, OpenTelemetryOptions observabilityOptions)
+    {
+
+        builder.WithTracing(tracing =>
+        {
+            string serviceName = $"{observabilityOptions.ApplicationName}.{observabilityOptions.ServiceName}";
+
+            tracing
+                 .AddSource("*")
+
+            .SetResourceBuilder(ResourceBuilder.CreateDefault()
+                    .AddService(serviceName: serviceName, serviceVersion: observabilityOptions.ServiceVersion, serviceInstanceId: observabilityOptions.ServiceId))
+            .AddHttpClientInstrumentation()
+            .AddAspNetCoreInstrumentation(options =>
+            {
+                options.RecordException = true;
+            })
+            .AddSqlClientInstrumentation()
+                .SetErrorStatusOnException()
+
+            .AddEntityFrameworkCoreInstrumentation()
+            .SetSampler(new TraceIdRatioBasedSampler(observabilityOptions.SamplingProbability))
+            .AddOtlpExporter(oltpOptions =>
+            {
+                oltpOptions.Endpoint = new Uri(observabilityOptions.OltpEndpoint);
+                oltpOptions.ExportProcessorType = observabilityOptions.ExportProcessorType;
+                oltpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+            });
+
+        });
+
+        return builder;
+    }
+
+    private static OpenTelemetryBuilder AddMetrics(this OpenTelemetryBuilder builder, OpenTelemetryOptions observabilityOptions)
+    {
+        builder.WithMetrics(metrics =>
+        {
+            metrics
+            .AddMeter("*")
+            .AddAspNetCoreInstrumentation()
+            .AddRuntimeInstrumentation()
+            .AddHttpClientInstrumentation();
+            metrics
+                .AddOtlpExporter((_, metricReaderOptions) =>
+                {
+
+                    _.Endpoint = new Uri(observabilityOptions.OltpEndpoint);
+                    _.ExportProcessorType = ExportProcessorType.Batch;
+                    _.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+                    metricReaderOptions.PeriodicExportingMetricReaderOptions.ExportIntervalMilliseconds = 5000;
+
+                });
+        });
+
+        return builder;
+    }
+
 
 
     public static IApplicationBuilder UseBaseObservabilityMiddlewares(this IApplicationBuilder app)

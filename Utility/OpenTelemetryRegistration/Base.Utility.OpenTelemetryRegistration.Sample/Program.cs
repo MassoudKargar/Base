@@ -1,4 +1,5 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Base.Extensions.DependencyInjection;
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -7,16 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PersonContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-builder.Services.AddBaseObservabilitySupport(c =>
-{
-    c.ApplicationName = "Base";
-    c.ServiceName = "OpenTelemetrySample";
-    c.ServiceVersion = "1.0.0";
-    c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
-    c.OltpEndpoint = "http://localhost:4317";
-    c.ExportProcessorType = OpenTelemetry.ExportProcessorType.Simple; 
-    c.SamplingProbability = 1;
-});
+builder.AddObservability();
 var app = builder.Build();
 
 
