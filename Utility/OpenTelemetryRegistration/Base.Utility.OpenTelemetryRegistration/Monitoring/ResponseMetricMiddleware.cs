@@ -13,10 +13,10 @@ public class ResponseMetricMiddleware(RequestDelegate request)
             return;
         }
         var sw = Stopwatch.StartNew();
-
         try
         {
-            await _request.Invoke(httpContext);
+            using (new Activity(path).Start())
+                await _request.Invoke(httpContext);
         }
         finally
         {
