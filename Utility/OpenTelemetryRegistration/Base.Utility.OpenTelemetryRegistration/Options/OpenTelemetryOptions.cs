@@ -1,6 +1,4 @@
-﻿using OpenTelemetry;
-
-namespace Base.Utilities.OpenTelemetryRegistration.Options;
+﻿namespace Base.Utilities.OpenTelemetryRegistration.Options;
 public class OpenTelemetryOptions
 {
     public string ApplicationName { get; set; }

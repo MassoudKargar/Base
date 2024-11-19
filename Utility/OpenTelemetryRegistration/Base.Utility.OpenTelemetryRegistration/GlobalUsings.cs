@@ -15,3 +15,5 @@ global using OpenTelemetry.Trace;
 
 global using System.Diagnostics;
 global using System.Diagnostics.Metrics;
+global using OpenTelemetry;
+global using OpenTelemetry.Logs;

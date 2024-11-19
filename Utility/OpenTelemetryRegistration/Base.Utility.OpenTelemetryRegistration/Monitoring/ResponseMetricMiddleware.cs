@@ -16,7 +16,9 @@ public class ResponseMetricMiddleware(RequestDelegate request)
         try
         {
             using (new Activity(path).Start())
+            {
                 await _request.Invoke(httpContext);
+            }
         }
         finally
         {
