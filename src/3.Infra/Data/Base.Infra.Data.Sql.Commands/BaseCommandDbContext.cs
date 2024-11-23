@@ -8,11 +8,6 @@ public abstract class BaseCommandDbContext : DbContext
 
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Server=.;Database=MiniBlogDb;User Id=masoud;Password=M@$$0ud1001;MultipleActiveResultSets=true;Encrypt=false");
-    }
-
     public void BeginTransaction()
     {
         _transaction = Database.BeginTransaction();

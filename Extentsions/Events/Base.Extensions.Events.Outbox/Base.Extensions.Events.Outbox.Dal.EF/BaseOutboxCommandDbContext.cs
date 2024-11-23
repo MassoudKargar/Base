@@ -9,9 +9,6 @@ public abstract class BaseOutboxCommandDbContext : BaseCommandDbContext
 
     }
 
-    protected BaseOutboxCommandDbContext()
-    {
-    }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);

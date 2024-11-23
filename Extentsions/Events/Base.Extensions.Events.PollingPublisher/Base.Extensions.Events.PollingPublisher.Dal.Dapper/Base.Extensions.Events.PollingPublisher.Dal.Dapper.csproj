@@ -1,27 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<Version>8.0.1</Version>
-		<Authors>Masoud kargar</Authors>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageIcon>base.png</PackageIcon>
-	</PropertyGroup>
-	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath="" />
-		<None Include="base.png" Pack="true" PackagePath="" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Dapper" Version="2.1.35" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-		<PackageReference Include="Base.Extensions.Events.Abstractions" Version="8.0.1" />
-	</ItemGroup>
-
-
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+	  <Version>9.0.0</Version>
+    <Authors>Masoud kargar</Authors>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>base.png</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="base.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.Events.Abstractions" Version="9.0.0" />
+  </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using Base.Extensions.ChangeDataLog.Hamster.Sample.DAL;
 using Base.Extensions.DependencyInjection;
 using Base.Infra.Data.Sql.Commands.Interceptors;
 
-string cnnString = "Server=;User Id=;Database=; Password=;MultipleActiveResultSets=true;Encrypt = false";
+string cnnString = "Server=.;User Id=sa;Database=BaseTemplateDb; Password=M@$$0ud1001;MultipleActiveResultSets=true;Encrypt = false";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

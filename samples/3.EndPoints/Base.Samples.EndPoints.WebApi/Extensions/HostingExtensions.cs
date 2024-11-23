@@ -1,5 +1,10 @@
 ﻿using Base.Extensions.DependencyInjection;
+using Base.Infra.Data.Sql.Commands;
+using Base.Infra.Data.Sql.Queries;
 using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.IdentityServer.Extensions;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using Serilog;
 
 namespace Base.Samples.EndPoints.WebApi.Extensions;
@@ -46,13 +51,13 @@ public static class HostingExtensions
         //builder.Services.AddSqlDistributedCache(configuration, "SqlDistributedCache");
 
         //CommandDbContext
-        builder.Services.AddDbContext<SampleCommandDbContext>(
+        builder.Services.AddDbContext<BaseCommandDbContext, SampleCommandDbContext>(
             c => c.UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
             .AddInterceptors(new SetPersianYeKeInterceptor(),
                              new AddAuditDataInterceptor()));
 
         //QueryDbContext
-        builder.Services.AddDbContext<SampleQueryDbContext>(
+        builder.Services.AddDbContext<BaseQueryDbContext, SampleQueryDbContext>(
             c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
 
         //PollingPublisher

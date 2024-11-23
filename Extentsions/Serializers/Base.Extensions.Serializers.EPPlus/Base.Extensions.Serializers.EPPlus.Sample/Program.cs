@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddBaseParrotTranslator(c =>
 {
-    c.ConnectionString = "Server =.; Database= MiniBlogDb;User Id = sa;Password=1qaz!QAZ; MultipleActiveResultSets=true";
+    c.ConnectionString = "Server =.; Database= BaseTemplateDb;User Id = sa;Password=M@$$0ud1001; MultipleActiveResultSets=true; Encrypt=false;";
     c.AutoCreateSqlTable = true;
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";

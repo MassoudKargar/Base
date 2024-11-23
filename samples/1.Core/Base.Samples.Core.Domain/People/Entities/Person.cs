@@ -14,9 +14,3 @@ public class Person : AggregateRoot
         AddEvent(new PersonCreated(BusinessId.Value, firstName.Value, lastName.Value));
     }
 }
-public class Person2 
-{
-    public int Id { get; set; }
-    public FirstName FirstName { get;  set; }
-    public LastName LastName { get;  set; }
-}

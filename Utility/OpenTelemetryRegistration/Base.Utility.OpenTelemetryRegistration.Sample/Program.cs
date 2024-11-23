@@ -12,7 +12,7 @@ builder.AddObservability();
 var app = builder.Build();
 
 
-app.UseBaseObservabilityMiddlewares();
+app.UseBaseObservabilityMiddleware();
 
 
 // Configure the HTTP request pipeline.

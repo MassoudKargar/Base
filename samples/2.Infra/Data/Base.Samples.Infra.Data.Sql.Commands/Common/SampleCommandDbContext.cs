@@ -8,7 +8,6 @@ public class SampleCommandDbContext : BaseCommandDbContext
         builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
     }
     public DbSet<Person> People { get; set; }
-    public DbSet<Person2> Person2 { get; set; }
     public SampleCommandDbContext(DbContextOptions<SampleCommandDbContext> options) : base(options)
     {
     }

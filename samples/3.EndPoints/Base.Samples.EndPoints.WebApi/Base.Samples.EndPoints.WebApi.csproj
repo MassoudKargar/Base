@@ -1,50 +1,46 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>f03e0d26-cea1-4e9e-b1cc-fbf973c26eea</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
-	  <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-
-	<ItemGroup>
-		<Compile Remove="Events\**" />
-		<Content Remove="Events\**" />
-		<EmbeddedResource Remove="Events\**" />
-		<None Remove="Events\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
-		<PackageReference Include="Base.Extensions.Caching.InMemory" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.Events.PollingPublisher" Version="8.0.1" />
-		<PackageReference Include="Base.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.1" />
-		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.MessageBus.RabbitMQ" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.Translations.Parrot" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.UsersManagement" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Events\**" />
+    <Content Remove="Events\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.0.0" />
+    <PackageReference Include="Base.Extensions.Caching.InMemory" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.Events.PollingPublisher" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.Events.PollingPublisher.Dal.Dapper" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.MessageBus.MessageInbox" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.MessageBus.RabbitMQ" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.Translations.Parrot" Version="9.0.0" />
+    <PackageReference Include="Base.Extensions.UsersManagement" Version="9.0.0" />
+    <PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="9.0.0" />
+    <PackageReference Include="Base.Utility.SerilogRegistration" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\src\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\..\src\4.EndPoints\Base.EndPoints.Web\Base.EndPoints.Web.csproj" />
     <ProjectReference Include="..\..\1.Core\Base.Samples.Core.ApplicationServices\Base.Samples.Core.ApplicationServices.csproj" />
@@ -53,5 +49,4 @@
     <ProjectReference Include="..\..\2.Infra\Data\Base.Samples.Infra.Data.Sql.Commands\Base.Samples.Infra.Data.Sql.Commands.csproj" />
     <ProjectReference Include="..\..\2.Infra\Data\Base.Samples.Infra.Data.Sql.Queries\Base.Samples.Infra.Data.Sql.Queries.csproj" />
   </ItemGroup>
-
 </Project>
