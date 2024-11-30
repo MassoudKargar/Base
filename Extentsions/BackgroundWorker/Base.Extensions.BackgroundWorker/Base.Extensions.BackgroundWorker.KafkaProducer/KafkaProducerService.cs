@@ -2,6 +2,7 @@
 using Base.Extensions.BackgroundWorker.KafkaConsumer;
 using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Base.Extensions.BackgroundWorker.KafkaProducer;
 
@@ -35,7 +36,7 @@ public abstract class KafkaProducerService<TKey, TValue>(IKafkaProducerConfigura
     {
         try
         {
-            using (_logger.BeginScope("Kafka App Produce Sample Data"))
+            using (new Activity(nameof(KafkaProducerService<TKey, TValue>)).Start())
             {
                 if (!cancellationToken.IsCancellationRequested)
                 {
@@ -44,7 +45,7 @@ public abstract class KafkaProducerService<TKey, TValue>(IKafkaProducerConfigura
                         Key = key,
                         Value = value
                     };
-                    await Producer.ProduceAsync(_configurationKafka.OutputTopic, msg, cancellationToken).ConfigureAwait(false);
+                    await Producer.ProduceAsync(_configurationKafka.OutputTopic, msg, cancellationToken);
 
                 }
             }
