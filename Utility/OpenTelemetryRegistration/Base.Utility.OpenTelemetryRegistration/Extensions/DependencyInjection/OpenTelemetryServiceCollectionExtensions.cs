@@ -119,7 +119,6 @@ public static class OpenTelemetryServiceCollectionExtensions
     public static IApplicationBuilder UseBaseObservabilityMiddleware(this IApplicationBuilder app)
     {
         app.UseMiddleware<ResponseMetricMiddleware>();
-        app.UseOpenTelemetryPrometheusScrapingEndpoint();
         return app;
     }
 }
