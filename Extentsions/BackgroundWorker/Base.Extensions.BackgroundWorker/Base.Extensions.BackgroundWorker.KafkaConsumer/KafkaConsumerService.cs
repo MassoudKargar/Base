@@ -7,17 +7,19 @@ using System.Diagnostics;
 namespace Base.Extensions.BackgroundWorker.KafkaConsumer;
 
 
-public abstract class KafkaConsumerService<TKey, TValue>(IConsumerConfigurationKafka configurationKafka, ILogger<KafkaConsumerService<TKey, TValue>> logger) : AbstractBackgroundWorker
+public abstract class KafkaConsumerService<TKey, TValue>
+    (IKafkaConsumerConfiguration configurationKafka, ILogger<KafkaConsumerService<TKey, TValue>> logger) 
+    : AbstractBackgroundWorker
 {
-    private readonly IConsumerConfigurationKafka _configurationKafka = configurationKafka;
+    private readonly IKafkaConsumerConfiguration _configurationKafka = configurationKafka;
     private readonly ILogger<KafkaConsumerService<TKey, TValue>> _logger = logger;
-    private IConsumer<TKey, TValue>? _consumer;
+    private IConsumer<TKey, TValue> consumer;
 
     public override async Task StartAsync(CancellationToken cancellationToken)
     {
         await _configurationKafka.GetConfiguration();
-        _consumer = new ConsumerBuilder<TKey, TValue>(_configurationKafka.ConsumerConfig).Build();
-        _consumer.Subscribe(_configurationKafka.InputTopic);
+        consumer = new ConsumerBuilder<TKey, TValue>(_configurationKafka.ConsumerConfig).Build();
+        consumer.Subscribe(_configurationKafka.InputTopic);
         await base.StartAsync(cancellationToken);
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -27,13 +29,13 @@ public abstract class KafkaConsumerService<TKey, TValue>(IConsumerConfigurationK
         {
             using (new Activity(nameof(KafkaConsumerService<TKey, TValue>)).Start())
             {
-                _consumer.Subscribe(new List<string>() { _configurationKafka.InputTopic });
+                consumer.Subscribe(new List<string>() { _configurationKafka.InputTopic });
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     try
                     {
                         _logger.LogInformation("Kafka Consumer Service has started.");
-                        var consumeResult = _consumer.Consume(stoppingToken);
+                        var consumeResult = consumer.Consume(stoppingToken);
                         if (consumeResult?.Message == null) continue;
                         if (consumeResult.Topic.Equals(_configurationKafka.InputTopic))
                         {
@@ -59,14 +61,14 @@ public abstract class KafkaConsumerService<TKey, TValue>(IConsumerConfigurationK
     protected abstract Task Consume(ConsumeResult<TKey, TValue> consumeResult, CancellationToken cancellationToken);
     public override Task StopAsync(CancellationToken cancellationToken)
     {
-        _consumer.Close();
+        consumer.Close();
         return base.StopAsync(cancellationToken);
     }
 
 
     public override void Dispose()
     {
-        _consumer.Dispose();
+        consumer.Dispose();
         base.Dispose();
     }
 
