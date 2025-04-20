@@ -3,9 +3,12 @@ public class ResponseMetricMiddleware(RequestDelegate request)
 {
     private readonly RequestDelegate _request = request ?? throw new ArgumentNullException(nameof(request));
 
-    public async Task Invoke(HttpContext httpContext, MetricReporter reporter)
+    public async Task Invoke(HttpContext httpContext)
     {
-        var path = httpContext.Request.Path.Value;
+        var path = httpContext.Request.Path.Value ?? "/";
+        var options = httpContext.RequestServices.GetRequiredService<IOptions<OpenTelemetryOptions>>().Value;
+        var serviceName = $"{options.ApplicationName}.{options.ServiceName}";
+        MetricReporter reporter = new MetricReporter(serviceName, "http");
 
         if (path == "/metrics")
         {

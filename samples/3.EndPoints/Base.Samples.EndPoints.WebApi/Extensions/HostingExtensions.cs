@@ -21,7 +21,7 @@ public static class HostingExtensions
 
         //Base
         builder.Services.AddBaseApiCore("Base");
-
+        builder.AddObservability();
         //microsoft
         builder.Services.AddEndpointsApiExplorer();
 
@@ -70,7 +70,7 @@ public static class HostingExtensions
 
         //builder.Services.AddRabbitMqMessageBus(configuration, "RabbitMq");
 
-        //builder.Services.AddTraceJeager(configuration, "OpenTeletmetry");
+        //builder.Services.AddTraceJeager(configuration, "OpenTelemetry");
 
         //builder.Services.AddIdentityServer(configuration, "OAuth");
 
@@ -82,6 +82,8 @@ public static class HostingExtensions
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
         //base
+
+        app.UseBaseObservabilityMiddleware();
         app.UseBaseApiExceptionHandler();
 
         //Serilog

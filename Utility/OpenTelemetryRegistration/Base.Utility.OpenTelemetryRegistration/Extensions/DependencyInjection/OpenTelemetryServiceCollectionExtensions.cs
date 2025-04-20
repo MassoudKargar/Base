@@ -5,28 +5,25 @@ public static class OpenTelemetryServiceCollectionExtensions
     {
         var configuration = builder.Configuration;
 
-        OpenTelemetryOptions observabilityOptions = new();
+        OpenTelemetryOptions observabilityOptions = new()
+        {
+            ApplicationName = "Base",
+            ServiceName = "OpenTelemetrySample",
+            ServiceVersion = "1.0.0",
+            ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98",
+            OltpEndpoint = "http://localhost:4317",
+            ExportProcessorType = ExportProcessorType.Simple,
+            SamplingProbability = 1
+        };
 
         var config = configuration.GetValue<OpenTelemetryOptions>(nameof(OpenTelemetryOptions));
-        if (config == null)
-        {
-            observabilityOptions = new OpenTelemetryOptions
-            {
-                ApplicationName = "Base",
-                ServiceName = "OpenTelemetrySample",
-                ServiceVersion = "1.0.0",
-                ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98",
-                OltpEndpoint = "http://localhost:4317",
-                ExportProcessorType = ExportProcessorType.Simple,
-                SamplingProbability = 1
-            };
-        }
-        else
+        if (config != null)
         {
             configuration
                 .GetRequiredSection(nameof(OpenTelemetryOptions))
                 .Bind(observabilityOptions);
         }
+        
         builder.Services
             .AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService(observabilityOptions.ServiceName))
@@ -110,7 +107,11 @@ public static class OpenTelemetryServiceCollectionExtensions
 
                 });
         });
-
+        builder.Services.AddScoped<MetricReporter>(sp => 
+        {
+            var options = sp.GetRequiredService<IOptions<OpenTelemetryOptions>>().Value;
+            return new MetricReporter(options.ServiceName, "http");
+        });
         return builder;
     }
 

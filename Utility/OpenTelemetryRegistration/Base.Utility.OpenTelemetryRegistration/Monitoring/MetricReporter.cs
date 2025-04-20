@@ -8,6 +8,11 @@ public class MetricReporter
 
     public MetricReporter(string meterName, string prefix)
     {
+        if (string.IsNullOrEmpty(meterName))
+            throw new ArgumentException("Meter name cannot be null or empty", nameof(meterName));
+        if (string.IsNullOrEmpty(prefix))
+            throw new ArgumentException("Prefix cannot be null or empty", nameof(prefix));
+
         var meter = new Meter(meterName);
         MetricName = meterName;
 
