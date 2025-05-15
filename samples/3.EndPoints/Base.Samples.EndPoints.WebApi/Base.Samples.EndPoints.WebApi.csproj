@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="9.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -37,8 +38,6 @@
     <PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="9.0.0" />
     <PackageReference Include="Base.Extensions.Translations.Parrot" Version="9.0.0" />
     <PackageReference Include="Base.Extensions.UsersManagement" Version="9.0.0" />
-    <PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="9.0.0" />
-    <PackageReference Include="Base.Utility.SerilogRegistration" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\2.Core\Base.Core.ApplicationServices\Base.Core.ApplicationServices.csproj" />
