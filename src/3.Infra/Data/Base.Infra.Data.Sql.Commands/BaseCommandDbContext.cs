@@ -1,7 +1,10 @@
-﻿namespace Base.Infra.Data.Sql.Commands;
+﻿using System.Reflection;
+
+namespace Base.Infra.Data.Sql.Commands;
 public abstract class BaseCommandDbContext : DbContext
 {
     protected IDbContextTransaction _transaction;
+    protected abstract Assembly ConfigurationsAssembly { get; }
 
     public BaseCommandDbContext(DbContextOptions options) : base(options)
     {
@@ -28,6 +31,8 @@ public abstract class BaseCommandDbContext : DbContext
         {
             throw new NullReferenceException("Please call `BeginTransaction()` method first.");
         }
+        HandleSoftDelete();
+        AddTimestamps();
         _transaction.Commit();
     }
 
@@ -48,6 +53,25 @@ public abstract class BaseCommandDbContext : DbContext
     {
         base.OnModelCreating(builder);
         builder.AddAuditableShadowProperties();
+        builder.ApplyConfigurationsFromAssembly(ConfigurationsAssembly);
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            // بررسی ارث‌بری از BaseEntity
+            if (entityType.ClrType.BaseType != null &&
+                entityType.ClrType.BaseType.IsGenericType &&
+                entityType.ClrType.BaseType.GetGenericTypeDefinition() == typeof(Entity<>))
+            {
+                var parameter = Expression.Parameter(entityType.ClrType, "e");
+                var filter = Expression.Lambda(
+                    Expression.Equal(
+                        Expression.Property(parameter, "Deleted"),
+                        Expression.Constant(false)
+                    ),
+                    parameter
+                );
+                entityType.SetQueryFilter(filter);
+            }
+        }
     }
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
@@ -59,7 +83,68 @@ public abstract class BaseCommandDbContext : DbContext
         configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
 
     }
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        HandleSoftDelete();
+        AddTimestamps();
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+    public override int SaveChanges()
+    {
+        HandleSoftDelete();
+        AddTimestamps();
+        return base.SaveChanges();
+    }
+    private void HandleSoftDelete()
+    {
+        foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted))
+        {
+            var entityType = entry.Entity.GetType();
+            var baseEntityType = entityType.BaseType;
 
+            while (baseEntityType != null)
+            {
+                if (baseEntityType.IsGenericType && baseEntityType.GetGenericTypeDefinition() == typeof(Entity<>))
+                {
+                    var deletedProperty = entityType.GetProperty(nameof(Entity<int>.Deleted));
+
+                    if (deletedProperty != null && deletedProperty.PropertyType == typeof(bool))
+                    {
+                        entry.State = EntityState.Modified;
+                        deletedProperty.SetValue(entry.Entity, true);
+                    }
+                    break;
+                }
+                baseEntityType = baseEntityType.BaseType;
+            }
+        }
+    }
+    private void AddTimestamps()
+    {
+        var entities = ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Modified);
+
+        foreach (var entity in entities)
+        {
+            var entityType = entity.Entity.GetType();
+            var baseEntityType = entityType.BaseType;
+
+            while (baseEntityType != null)
+            {
+                if (baseEntityType.IsGenericType && baseEntityType.GetGenericTypeDefinition() == typeof(Entity<>))
+                {
+                    var modifiedProperty = entityType.GetProperty(nameof(Entity<int>.ModificationDate));
+
+                    if (modifiedProperty != null && modifiedProperty.PropertyType == typeof(DateTime?))
+                    {
+                        modifiedProperty.SetValue(entity.Entity, DateTime.UtcNow);
+                    }
+                    break;
+                }
+                baseEntityType = baseEntityType.BaseType;
+            }
+        }
+    }
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

@@ -5,7 +5,7 @@ public class CreatePersonHandler(BaseServices baseServices, IPersonCommandReposi
 
     public override async Task<CommandResult<long>> Handle(CreatePerson command)
     {
-        Person person = new(new FirstName(command.FirstName), new LastName(command.LastName));
+        Person person = new(new FirstName(command.FirstName), LastName.Create(command.LastName));
         await repository.InsertAsync(person);
         await repository.CommitAsync();
         return await OkAsync(person.Id);

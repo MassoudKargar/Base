@@ -19,7 +19,7 @@ public static class ApiAuthenticationServiceCollectionExtensions
     }
 
     public static IServiceCollection AddBaseApiAuthentication(this IServiceCollection services, Action<ApiAuthenticationOption> action)
-    {
+    { 
         services.Configure(action);
         var option = new ApiAuthenticationOption();
         action.Invoke(option);

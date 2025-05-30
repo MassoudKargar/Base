@@ -21,7 +21,10 @@ public abstract class Entity<TId> : IAuditableEntity
     /// All communication should be established with the help of this ID.
     /// </summary>
     public BusinessId BusinessId { get; protected set; } = BusinessId.FromGuid(Guid.NewGuid());
+    public bool Deleted { get; set; }
+    public DateTime? ModificationDate { get; set; }
 
+    public DateTime CreationDate { get; set; }
     /// <summary>
     /// The default constructor is defined as Protected.
     /// Given that this needs to be created when constructing the basic Entity properties, no object should be created without filling these properties.
