@@ -1,4 +1,6 @@
-﻿namespace Base.Infra.Data.Sql.Queries;
+﻿using Base.Core.Contracts.Data.Queries;
+
+namespace Base.Infra.Data.Sql.Queries;
 public class BaseQueryRepository<TDbContext>(TDbContext dbContext) : IQueryRepository
     where TDbContext : BaseQueryDbContext
 {
