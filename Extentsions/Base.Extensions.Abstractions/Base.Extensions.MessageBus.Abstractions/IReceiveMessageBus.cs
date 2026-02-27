@@ -1,7 +1,10 @@
 ﻿namespace Base.Extensions.MessageBus.Abstractions;
 
-public interface IReceiveMessageBus
+public interface IReceiveMessageBus : IAsyncDisposable
 {
-    void Subscribe(string serviceId, string eventName);
-    void Receive(string commandName);
+    Task InitializeAsync(CancellationToken cancellationToken = default);
+
+    Task SubscribeAsync(string serviceId, string eventName, CancellationToken cancellationToken = default);
+
+    Task ReceiveAsync(string commandName, CancellationToken cancellationToken = default);
 }

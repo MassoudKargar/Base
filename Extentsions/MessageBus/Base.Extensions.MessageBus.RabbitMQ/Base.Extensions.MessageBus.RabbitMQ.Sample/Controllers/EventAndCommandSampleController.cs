@@ -7,14 +7,14 @@ public class EventAndCommandSampleController(ISendMessageBus sendMessageBus) : C
     [HttpPost("SendEvent")]
     public IActionResult SendEvent([FromBody] PersonEvent personEvent)
     {
-        sendMessageBus.Publish(personEvent);
+        sendMessageBus.PublishAsync(personEvent);
         return Ok();
     }
 
     [HttpPost("SendCommand")]
     public IActionResult SendCommand([FromBody] PersonCommand personCommand)
     {
-        sendMessageBus.SendCommandTo("SampleApplication", "PersonCommand", personCommand);
+        sendMessageBus.SendCommandAsync("SampleApplication", personCommand);
         return Ok();
     }
 }

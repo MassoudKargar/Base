@@ -1,34 +1,64 @@
-﻿using Base.Extensions.MessageBus.Abstractions;
-
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Base.Extensions.MessageBus.Abstractions.Fakes;
 
-public class FakeSendMessageBus(ILogger<FakeSendMessageBus> logger) : ISendMessageBus
+public sealed class FakeSendMessageBus : ISendMessageBus
 {
-    private readonly ILogger<FakeSendMessageBus> _logger = logger;
+    private readonly ILogger<FakeSendMessageBus> _logger;
 
-    public void Publish<TInput>(TInput input)
+    public List<object> PublishedEvents { get; } = new();
+    public List<(string Destination, object Command, MessageContext? Context)> SentCommands { get; } = new();
+    public List<Parcel> SentParcels { get; } = new();
+
+    public FakeSendMessageBus(ILogger<FakeSendMessageBus> logger)
     {
-        _logger.LogInformation("Message published by fake message bus: {input}", input.ToString());
+        _logger = logger;
     }
 
-    public void Send(Parcel parcel)
+    public Task PublishAsync<TEvent>(
+        TEvent @event,
+        MessageContext? context = null,
+        CancellationToken cancellationToken = default)
+        where TEvent : class
     {
-        _logger.LogInformation("Message send by fake message bus: {parcel}", parcel.ToString());
+        PublishedEvents.Add(@event!);
+
+        _logger.LogInformation(
+            "Fake publish event {eventType} with correlation {correlationId}",
+            typeof(TEvent).Name,
+            context?.CorrelationId);
+
+        return Task.CompletedTask;
     }
 
-    public void SendCommandTo<TCommandData>(string destinationService, string commandName, TCommandData commandData)
+    public Task SendCommandAsync<TCommand>(
+        string destinationService,
+        TCommand command,
+        MessageContext? context = null,
+        CancellationToken cancellationToken = default)
+        where TCommand : class
     {
-        _logger.LogInformation("command send to {destinationService} by fake message bus. Command name: {commandName} and command data is {commandData}",
-            destinationService, commandName, commandData?.ToString());
+        SentCommands.Add((destinationService, command!, context));
+
+        _logger.LogInformation(
+            "Fake send command {commandType} to {destinationService} with correlation {correlationId}",
+            typeof(TCommand).Name,
+            destinationService,
+            context?.CorrelationId);
+
+        return Task.CompletedTask;
     }
 
-    public void SendCommandTo<TCommandData>(string destinationService, string commandName, string correlationId, TCommandData commandData)
+    public Task SendAsync(
+        Parcel parcel,
+        CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("command send to {destinationService} by fake message bus. Command name: {commandName} with correlation id: " +
-            "{correlationId} and command data is {commandData}", destinationService, commandName, correlationId, commandData?.ToString());
+        SentParcels.Add(parcel);
+
+        _logger.LogInformation(
+            "Fake send raw parcel with id {parcelId}",
+            parcel.MessageId);
+
+        return Task.CompletedTask;
     }
-
-
 }

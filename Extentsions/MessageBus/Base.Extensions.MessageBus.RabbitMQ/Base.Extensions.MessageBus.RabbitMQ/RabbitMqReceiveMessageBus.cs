@@ -1,115 +1,262 @@
 ﻿namespace Base.Extensions.MessageBus.RabbitMQ;
-public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
+
+public sealed class RabbitMqReceiveMessageBus : IReceiveMessageBus, IAsyncDisposable
 {
     private readonly ILogger<RabbitMqReceiveMessageBus> _logger;
-    private readonly RabbitMqOptions _rabbitMqOptions;
+    private readonly RabbitMqOptions _options;
     private readonly IConnection _connection;
-    private readonly IModel _channel;
-    private readonly string _eventQueueName;
-    private readonly string _commandQueueName;
-    private IServiceScopeFactory _serviceScopeFactory;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public RabbitMqReceiveMessageBus(IConnection connection,
-                                     ILogger<RabbitMqReceiveMessageBus> logger,
-                                     IOptions<RabbitMqOptions> rabbitMqOptions,
-                                     IServiceScopeFactory serviceScopeFactory)
+    private IChannel? _eventChannel;
+    private IChannel? _commandChannel;
+
+    private string EventQueueName => $"{_options.ServiceName}.EventsInputQueue";
+    private string CommandQueueName => $"{_options.ServiceName}.CommandsInputQueue";
+
+    public RabbitMqReceiveMessageBus(
+        IConnection connection,
+        ILogger<RabbitMqReceiveMessageBus> logger,
+        IOptions<RabbitMqOptions> options,
+        IServiceScopeFactory scopeFactory)
     {
-        _logger = logger;
-        _rabbitMqOptions = rabbitMqOptions.Value;
-        _serviceScopeFactory = serviceScopeFactory;
         _connection = connection;
-        _channel = _connection.CreateModel();
-        _channel.ExchangeDeclare(_rabbitMqOptions.ExchangeName, ExchangeType.Topic, true, false, null);
-        _commandQueueName = $"{_rabbitMqOptions.ServiceName}.CommandsInputQueue";
-        _eventQueueName = $"{_rabbitMqOptions.ServiceName}.EventsInputQueue";
-        CreateCommandQueue();
-        CreateEventQueue();
+        _logger = logger;
+        _options = options.Value;
+        _scopeFactory = scopeFactory;
     }
 
-    private void CreateEventQueue()
+    #region Initialization
+
+    public Task InitializeAsync()
+        => InitializeAsync(CancellationToken.None);
+
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
-        var consumer = new EventingBasicConsumer(_channel);
-        
-        consumer.Received += Consumer_EventReceived;
-        var queue = _channel.QueueDeclare(_eventQueueName, true, false, false);
-        _channel.BasicConsume(queue.QueueName, true, consumer);
-        _logger.LogInformation("Event Queue With Name {queueName} Created.", queue.QueueName);
+        _eventChannel = await _connection.CreateChannelAsync(new (true, true),cancellationToken);
+        _commandChannel = await _connection.CreateChannelAsync(new (true, true),cancellationToken);
+
+        // QoS (مهم برای جلوگیری از overload شدن سرویس)
+        await _eventChannel.BasicQosAsync(0, 1, false, cancellationToken);
+        await _commandChannel.BasicQosAsync(0, 1, false, cancellationToken);
+
+        await DeclareInfrastructureAsync(_eventChannel, cancellationToken);
+        await DeclareInfrastructureAsync(_commandChannel, cancellationToken);
+
+        await CreateEventConsumerAsync(cancellationToken);
+        await CreateCommandConsumerAsync(cancellationToken);
     }
 
-    private void CreateCommandQueue()
+    private async Task DeclareInfrastructureAsync(IChannel channel, CancellationToken cancellationToken)
     {
-        var consumer = new EventingBasicConsumer(_channel);
-        consumer.Received += Consumer_CommandReceived;
-        var queue = _channel.QueueDeclare(_commandQueueName, true, false, false);
-        _channel.BasicConsume(queue.QueueName, true, consumer);
-        _logger.LogInformation("Command Queue With Name {commandName} Created.", queue.QueueName);
+        await channel.ExchangeDeclareAsync(
+            exchange: _options.ExchangeName,
+            type: ExchangeType.Topic,
+            durable: true,
+            autoDelete: false,
+            cancellationToken: cancellationToken);
+
+        _logger.LogInformation("Exchange {exchange} declared.", _options.ExchangeName);
     }
 
-    public void Subscribe(string serviceId, string eventName)
+    #endregion
+
+    #region Event Consumer
+
+    private async Task CreateEventConsumerAsync(CancellationToken cancellationToken)
     {
-        var route = $"{serviceId}.{RabbitMqSendMessageBusConstants.@event}.{eventName}";
-        _channel.QueueBind(_eventQueueName, _rabbitMqOptions.ExchangeName, route);
-        _logger.LogInformation("ServiceId: {serviceId} With EventName: {eventName} Binded.", serviceId, eventName);
+        if (_eventChannel is null)
+            throw new InvalidOperationException("Event channel not initialized.");
+
+        await _eventChannel.QueueDeclareAsync(
+            queue: EventQueueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            cancellationToken: cancellationToken);
+
+        var consumer = new AsyncEventingBasicConsumer(_eventChannel);
+
+        consumer.ReceivedAsync += async (_, ea) =>
+        {
+            using var scope = _scopeFactory.CreateScope();
+
+            try
+            {
+                StartActivity(ea);
+
+                _logger.LogDebug("Event received with routing key {routingKey}", ea.RoutingKey);
+
+                var messageConsumer = scope.ServiceProvider
+                    .GetRequiredService<IMessageConsumer>();
+
+                await messageConsumer.ConsumeEvent(
+                    ea.BasicProperties?.AppId,
+                    ea.ToParcel());
+
+                await _eventChannel.BasicAckAsync(ea.DeliveryTag, false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while processing event.");
+                await _eventChannel.BasicNackAsync(ea.DeliveryTag, false, true);
+            }
+        };
+
+        await _eventChannel.BasicConsumeAsync(
+            queue: EventQueueName,
+            autoAck: false,
+            consumer: consumer,
+            cancellationToken: cancellationToken);
+
+        _logger.LogInformation("Event queue {queue} ready.", EventQueueName);
     }
 
-    public void Receive(string commandName)
+    #endregion
+
+    #region Command Consumer
+
+    private async Task CreateCommandConsumerAsync(CancellationToken cancellationToken)
     {
-        var route = $"{_rabbitMqOptions.ServiceName}.{RabbitMqSendMessageBusConstants.command}.{commandName}";
-        _channel.QueueBind(_commandQueueName, _rabbitMqOptions.ExchangeName, route);
-        _logger.LogInformation("Command With CommandName: {commandName} Binded.", commandName);
+        if (_commandChannel is null)
+            throw new InvalidOperationException("Command channel not initialized.");
+
+        await _commandChannel.QueueDeclareAsync(
+            queue: CommandQueueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            cancellationToken: cancellationToken);
+
+        var consumer = new AsyncEventingBasicConsumer(_commandChannel);
+
+        consumer.ReceivedAsync += async (_, ea) =>
+        {
+            using var scope = _scopeFactory.CreateScope();
+
+            try
+            {
+                StartActivity(ea);
+
+                _logger.LogDebug("Command received with routing key {routingKey}", ea.RoutingKey);
+
+                var messageConsumer = scope.ServiceProvider
+                    .GetRequiredService<IMessageConsumer>();
+
+                await messageConsumer.ConsumeCommand(
+                    ea.BasicProperties?.AppId,
+                    ea.ToParcel());
+
+                await _commandChannel.BasicAckAsync(ea.DeliveryTag, false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while processing command.");
+                await _commandChannel.BasicNackAsync(ea.DeliveryTag, false, true);
+            }
+        };
+
+        await _commandChannel.BasicConsumeAsync(
+            queue: CommandQueueName,
+            autoAck: false,
+            consumer: consumer,
+            cancellationToken: cancellationToken);
+
+        _logger.LogInformation("Command queue {queue} ready.", CommandQueueName);
     }
 
-    private void Consumer_EventReceived(object sender, BasicDeliverEventArgs e)
+    #endregion
+
+    #region Bindings
+
+    public Task SubscribeAsync(string serviceId, string eventName)
+        => SubscribeAsync(serviceId, eventName, CancellationToken.None);
+
+    public async Task SubscribeAsync(
+        string serviceId,
+        string eventName,
+        CancellationToken cancellationToken = default)
     {
-        using IServiceScope scope = _serviceScopeFactory.CreateScope();
+        if (_eventChannel is null)
+            throw new InvalidOperationException("Event channel not initialized.");
+
+        var route = $"{serviceId}.event.{eventName}";
+
+        await _eventChannel.QueueBindAsync(
+            queue: EventQueueName,
+            exchange: _options.ExchangeName,
+            routingKey: route,
+            cancellationToken: cancellationToken);
+
+        _logger.LogInformation("Bound event {route}", route);
+    }
+
+    public Task ReceiveAsync(string commandName)
+        => ReceiveAsync(commandName, CancellationToken.None);
+
+    public async Task ReceiveAsync(
+        string commandName,
+        CancellationToken cancellationToken = default)
+    {
+        if (_commandChannel is null)
+            throw new InvalidOperationException("Command channel not initialized.");
+
+        var route = $"{_options.ServiceName}.command.{commandName}";
+
+        await _commandChannel.QueueBindAsync(
+            queue: CommandQueueName,
+            exchange: _options.ExchangeName,
+            routingKey: route,
+            cancellationToken: cancellationToken);
+
+        _logger.LogInformation("Bound command {route}", route);
+    }
+
+    #endregion
+
+    #region Tracing
+
+    private void StartActivity(BasicDeliverEventArgs ea)
+    {
+        var activity = new Activity("RabbitMqMessageReceived");
+        activity.AddTag("ApplicationName", _options.ServiceName);
+
+        if (ea.BasicProperties?.Headers is { } headers &&
+            headers.TryGetValue("TraceId", out var traceObj) &&
+            headers.TryGetValue("SpanId", out var spanObj) &&
+            traceObj is ReadOnlyMemory<byte> traceBytes &&
+            spanObj is ReadOnlyMemory<byte> spanBytes)
+        {
+            var traceId = Encoding.UTF8.GetString(traceBytes.Span);
+            var spanId = Encoding.UTF8.GetString(spanBytes.Span);
+
+            activity.SetParentId($"00-{traceId}-{spanId}-01");
+        }
+
+        activity.Start();
+    }
+
+    #endregion
+
+    #region Dispose
+
+    public async ValueTask DisposeAsync()
+    {
         try
         {
-            Activity span = StartChildActivity(e);
-            _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
-            var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-            consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel()).Wait();
+            if (_eventChannel is not null)
+                await _eventChannel.CloseAsync();
+
+            if (_commandChannel is not null)
+                await _commandChannel.CloseAsync();
+
+            if (_connection.IsOpen)
+                await _connection.CloseAsync();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, ex.Message);
-            throw;
+            _logger.LogError(ex, "Error while disposing RabbitMqReceiveMessageBus.");
         }
     }
 
-    private void Consumer_CommandReceived(object sender, BasicDeliverEventArgs e)
-    {
-        using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        try
-        {
-            Activity span = StartChildActivity(e);
-            _logger.LogDebug("Command Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
-            var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-            consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel()).Wait();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, ex.Message);
-            throw;
-        }
-
-    }
-
-    private Activity StartChildActivity(BasicDeliverEventArgs e)
-    {
-        var span = new Activity("RabbitMqCommandReceived");
-        span.AddTag("ApplicationName", _rabbitMqOptions.ServiceName);
-        if (e.BasicProperties != null && e.BasicProperties.Headers != null && e.BasicProperties.Headers.ContainsKey("TraceId") && e.BasicProperties.Headers.ContainsKey("SpanId"))
-        {            
-            span.SetParentId($"00-{System.Text.Encoding.UTF8.GetString(e.BasicProperties.Headers["TraceId"] as byte[])}-{System.Text.Encoding.UTF8.GetString(e.BasicProperties.Headers["SpanId"] as byte[])}-00");
-        }
-        span.Start();
-        return span;
-    }
-
-    public void Dispose()
-    {
-        _channel.Close();
-        _connection.Close();
-    }
+    #endregion
 }
-

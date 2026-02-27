@@ -1,23 +1,30 @@
-﻿namespace Base.Extensions.MessageBus.Abstractions.Fakes;
+﻿
+namespace Base.Extensions.MessageBus.Abstractions.Fakes;
 
-public class FakeMessageConsumer : IMessageConsumer
+public sealed class FakeMessageConsumer : IMessageConsumer
 {
-    public async Task<bool> ConsumeCommand(string sender, Parcel parcel)
+    public List<(string Sender, Parcel Parcel)> ConsumedCommands { get; } = new();
+    public List<(string Sender, Parcel Parcel)> ConsumedEvents { get; } = new();
+
+    public bool ShouldFail { get; set; }
+
+    public Task<bool> ConsumeCommand(string sender, Parcel parcel)
     {
-        Consume("command", sender, parcel);
-        return true;
+        if (ShouldFail)
+            throw new InvalidOperationException("Fake command failure");
+
+        ConsumedCommands.Add((sender, parcel));
+
+        return Task.FromResult(true);
     }
 
-
-
-    public async Task<bool> ConsumeEvent(string sender, Parcel parcel)
+    public Task<bool> ConsumeEvent(string sender, Parcel parcel)
     {
-        Consume("event", sender, parcel);
-        return true;
-    }
+        if (ShouldFail)
+            throw new InvalidOperationException("Fake event failure");
 
-    private static void Consume(string type, string sender, Parcel parcel)
-    {
-        Console.WriteLine($"Message {parcel.MessageName} of type {type} by Id {parcel.MessageId} from route {parcel.Route} from service {sender} Consumed");
+        ConsumedEvents.Add((sender, parcel));
+
+        return Task.FromResult(true);
     }
 }

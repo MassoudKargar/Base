@@ -1,12 +1,24 @@
 ﻿namespace Base.Extensions.MessageBus.Abstractions;
+
 /// <summary>
-/// جهت ارسال پیام از این زیر ساخت اتستفاده می‌شود
-/// پیام ها می‌توانند در قالب دستوری باشند که به سرویسی خاص ارسال می‌شوند یا پیامی عمومی که برای همه ارسال می‌شود
+/// مسئول ارسال پیام‌های دستوری و رویدادی به زیرساخت پیام‌رسان
 /// </summary>
 public interface ISendMessageBus
 {
-    void Publish<TInput>(TInput input);
-    void SendCommandTo<TCommandData>(string destinationService, string commandName, TCommandData commandData);
-    void SendCommandTo<TCommandData>(string destinationService, string commandName, string correlationId, TCommandData commandData);
-    void Send(Parcel parcel);
+    Task PublishAsync<TEvent>(
+        TEvent @event,
+        MessageContext? context = null,
+        CancellationToken cancellationToken = default)
+        where TEvent : class;
+
+    Task SendCommandAsync<TCommand>(
+        string destinationService,
+        TCommand command,
+        MessageContext? context = null,
+        CancellationToken cancellationToken = default)
+        where TCommand : class;
+
+    Task SendAsync(
+        Parcel parcel,
+        CancellationToken cancellationToken = default);
 }

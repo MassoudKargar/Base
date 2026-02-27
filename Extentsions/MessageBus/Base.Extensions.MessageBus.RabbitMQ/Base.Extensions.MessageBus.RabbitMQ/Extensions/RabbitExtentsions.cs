@@ -3,15 +3,14 @@ static class RabbitExtensions
 {
     public static Parcel ToParcel(this BasicDeliverEventArgs basicDeliverEventArgs)
     {
-        Parcel parcel = new()
-        {
-            CorrelationId = basicDeliverEventArgs?.BasicProperties?.CorrelationId,
-            MessageId = basicDeliverEventArgs?.BasicProperties.MessageId,
-            Route = basicDeliverEventArgs.RoutingKey,
-            MessageBody = Encoding.UTF8.GetString(basicDeliverEventArgs.Body.ToArray()),
-            MessageName = basicDeliverEventArgs.BasicProperties.Type,
-            Headers = basicDeliverEventArgs?.BasicProperties?.Headers != null ? (Dictionary<string, object>)basicDeliverEventArgs?.BasicProperties?.Headers : null
-        };
+        Parcel parcel = new(messageName: basicDeliverEventArgs.BasicProperties.Type,
+            body: Encoding.UTF8.GetString(basicDeliverEventArgs.Body.ToArray()),
+            route: basicDeliverEventArgs.RoutingKey,
+            messageId: basicDeliverEventArgs.BasicProperties.MessageId,
+                correlationId: basicDeliverEventArgs.BasicProperties.CorrelationId,
+                headers: basicDeliverEventArgs?.BasicProperties.Headers != null 
+                    ? (Dictionary<string, string>)basicDeliverEventArgs?.BasicProperties?.Headers : null
+                );
         return parcel;
     }
 }

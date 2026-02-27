@@ -24,14 +24,15 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddSingleton(sp =>
+        services.AddSingleton(async sp =>
         {
             var options = sp.GetRequiredService<IOptions<RabbitMqOptions>>();
             var factory = new ConnectionFactory()
             {
                 Uri = new Uri(options.Value.Url)
             };
-            var connection = factory.CreateConnection();
+            // Create connection using async API synchronously to ensure correct IConnection registration
+            var connection = await factory.CreateConnectionAsync();
             return connection;
         });
         services.AddScoped<ISendMessageBus, RabbitMqSendMessageBus>();
@@ -49,7 +50,7 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
         var receiveMessageBus = serviceProvider.GetRequiredService<IReceiveMessageBus>();
         foreach (var command in commands)
         {
-            receiveMessageBus.Receive(command);
+            receiveMessageBus.ReceiveAsync(command);
         }
     }
 
@@ -62,7 +63,7 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
         var receiveMessageBus = serviceProvider.GetRequiredService<IReceiveMessageBus>();
         foreach (var @event in events)
         {
-            receiveMessageBus.Subscribe(@event.Key, @event.Value);
+            receiveMessageBus.SubscribeAsync(@event.Key, @event.Value);
         }
     }
 }

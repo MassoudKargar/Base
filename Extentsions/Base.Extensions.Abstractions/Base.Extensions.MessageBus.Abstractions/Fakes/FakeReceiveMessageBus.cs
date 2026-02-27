@@ -2,15 +2,48 @@
 
 namespace Base.Extensions.MessageBus.Abstractions.Fakes;
 
-public class FakeReceiveMessageBus(ILogger<FakeSendMessageBus> logger) : IReceiveMessageBus
+public sealed class FakeReceiveMessageBus : IReceiveMessageBus
 {
-    public void Receive(string commandName)
+    private readonly ILogger<FakeReceiveMessageBus> _logger;
+
+    public FakeReceiveMessageBus(ILogger<FakeReceiveMessageBus> logger)
     {
-        logger.LogInformation("fake message bus receive {commandName}", commandName);
+        _logger = logger;
     }
 
-    public void Subscribe(string serviceId, string eventName)
+    public Task InitializeAsync(CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("fake message bus subscribe for event: {eventName} from service {serviceId}", eventName, serviceId);
+        _logger.LogInformation("Fake message bus initialized.");
+        return Task.CompletedTask;
+    }
+
+    public Task SubscribeAsync(
+        string serviceId,
+        string eventName,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation(
+            "Fake subscribe for event {eventName} from service {serviceId}",
+            eventName,
+            serviceId);
+
+        return Task.CompletedTask;
+    }
+
+    public Task ReceiveAsync(
+        string commandName,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation(
+            "Fake receive command {commandName}",
+            commandName);
+
+        return Task.CompletedTask;
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _logger.LogInformation("Fake message bus disposed.");
+        return ValueTask.CompletedTask;
     }
 }
