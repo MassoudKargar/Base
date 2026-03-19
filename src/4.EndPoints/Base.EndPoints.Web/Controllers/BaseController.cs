@@ -7,13 +7,13 @@ public class BaseController : Controller
     protected IEventDispatcher EventDispatcher => HttpContext.EventDispatcher();
     protected BaseServices BaseServices => HttpContext.BaseApplicationContext();
 
-    public IActionResult Excel<T>(List<T> list)
+    public IActionResult Excel<T>(List<T> list, CancellationToken cancellationToken)
     {
         var serializer = (IExcelSerializer)HttpContext.RequestServices.GetRequiredService(typeof(IExcelSerializer));
         var bytes = serializer.ListToExcelByteArray(list);
         return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     }
-    public IActionResult Excel<T>(List<T> list, string fileName)
+    public IActionResult Excel<T>(List<T> list, string fileName, CancellationToken cancellationToken)
     {
         var serializer = (IExcelSerializer)HttpContext.RequestServices.GetRequiredService(typeof(IExcelSerializer));
         var bytes = serializer.ListToExcelByteArray(list);
@@ -21,9 +21,9 @@ public class BaseController : Controller
     }
 
 
-    protected async Task<IActionResult> Create<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
+    protected async Task<IActionResult> Create<TCommand, TCommandResult>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand<TCommandResult>
     {
-        var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
+        var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command, cancellationToken);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.Created, result.Data);
@@ -31,9 +31,9 @@ public class BaseController : Controller
         return BadRequest(result.Messages);
     }
 
-    protected async Task<IActionResult> Create<TCommand>(TCommand command) where TCommand : class, ICommand
+    protected async Task<IActionResult> Create<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand
     {
-        var result = await CommandDispatcher.Send(command);
+        var result = await CommandDispatcher.Send(command, cancellationToken);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.Created);
@@ -42,9 +42,9 @@ public class BaseController : Controller
     }
 
 
-    protected async Task<IActionResult> Edit<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
+    protected async Task<IActionResult> Edit<TCommand, TCommandResult>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand<TCommandResult>
     {
-        var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
+        var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command, cancellationToken);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
@@ -56,9 +56,9 @@ public class BaseController : Controller
         return BadRequest(result.Messages);
     }
 
-    protected async Task<IActionResult> Edit<TCommand>(TCommand command) where TCommand : class, ICommand
+    protected async Task<IActionResult> Edit<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand
     {
-        var result = await CommandDispatcher.Send(command);
+        var result = await CommandDispatcher.Send(command, cancellationToken);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK);
@@ -71,9 +71,9 @@ public class BaseController : Controller
     }
 
 
-    protected async Task<IActionResult> Delete<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
+    protected async Task<IActionResult> Delete<TCommand, TCommandResult>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand<TCommandResult>
     {
-        var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
+        var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command, cancellationToken);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
@@ -85,9 +85,9 @@ public class BaseController : Controller
         return BadRequest(result.Messages);
     }
 
-    protected async Task<IActionResult> Delete<TCommand>(TCommand command) where TCommand : class, ICommand
+    protected async Task<IActionResult> Delete<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand
     {
-        var result = await CommandDispatcher.Send(command);
+        var result = await CommandDispatcher.Send(command, cancellationToken);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK);
@@ -100,9 +100,9 @@ public class BaseController : Controller
     }
 
 
-    protected async Task<IActionResult> Query<TQuery, TQueryResult>(TQuery query) where TQuery : class, IQuery<TQueryResult>
+    protected async Task<IActionResult> Query<TQuery, TQueryResult>(TQuery query, CancellationToken cancellationToken) where TQuery : class, IQuery<TQueryResult>
     {
-        var result = await QueryDispatcher.Execute<TQuery, TQueryResult>(query);
+        var result = await QueryDispatcher.Execute<TQuery, TQueryResult>(query, cancellationToken);
 
         if (result.Status.Equals(ApplicationServiceStatus.InvalidDomainState) || result.Status.Equals(ApplicationServiceStatus.ValidationError))
         {

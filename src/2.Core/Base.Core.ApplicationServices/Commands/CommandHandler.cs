@@ -7,7 +7,7 @@ public abstract class CommandHandler<TCommand, TData>(BaseServices baseServices)
 
     protected readonly CommandResult<TData> result = new();
 
-    public abstract Task<CommandResult<TData>> Handle(TCommand command);
+    public abstract Task<CommandResult<TData>> Handle(TCommand command,CancellationToken cancellationToken);
     protected virtual Task<CommandResult<TData>> OkAsync(TData data)
     {
         result._data = data;
@@ -49,7 +49,7 @@ public abstract class CommandHandler<TCommand>(BaseServices baseServices) : ICom
 {
     protected readonly BaseServices BaseServices = baseServices;
     protected readonly CommandResult result = new();
-    public abstract Task<CommandResult> Handle(TCommand command);
+    public abstract Task<CommandResult> Handle(TCommand command,CancellationToken cancellationToken);
 
     protected virtual Task<CommandResult> OkAsync()
     {

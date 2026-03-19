@@ -12,11 +12,11 @@ public class CommandDispatcherDomainExceptionHandlerDecorator(
     #endregion
 
     #region Send Commands
-    public override async Task<CommandResult> Send<TCommand>(TCommand command)
+    public override async Task<CommandResult> Send<TCommand>(TCommand command, CancellationToken cancellationToken)
     {
         try
         {
-            var result = _commandDispatcher.Send(command);
+            var result = _commandDispatcher.Send(command, cancellationToken);
             return await result;
         }
         catch (DomainStateException ex)
@@ -36,11 +36,11 @@ public class CommandDispatcherDomainExceptionHandlerDecorator(
 
     }
 
-    public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command)
+    public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command, CancellationToken cancellationToken)
     {
         try
         {
-            var result = await _commandDispatcher.Send<TCommand, TData>(command);
+            var result = await _commandDispatcher.Send<TCommand, TData>(command, cancellationToken);
             return result;
 
         }

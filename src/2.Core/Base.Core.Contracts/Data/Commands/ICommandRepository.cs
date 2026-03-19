@@ -42,21 +42,22 @@ public interface ICommandRepository<TEntity, in TId> : IUnitOfWork
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید به دیتابیس اضافه شود.</param>
-    Task InsertAsync(TEntity entity);
+    /// <param name="cancellationToken"></param>
+    Task InsertAsync(TEntity entity, CancellationToken cancellationToken);
 
     /// <summary>
     /// یک شی را با شناسه از دیتابیس یافته و بازگشت می‌دهد.
     /// </summary>
     /// <param name="id">شناسه شی مورد نیاز</param>
     /// <returns>نمونه ساخته شده از شی</returns>
-    TEntity Get(TId id);
-    Task<TEntity> GetAsync(TId id);
-    TEntity Get(BusinessId businessId);
-    Task<TEntity> GetAsync(BusinessId businessId);
-    TEntity GetGraph(TId id);
-    Task<TEntity> GetGraphAsync(TId id);
-    TEntity GetGraph(BusinessId businessId);
-    Task<TEntity> GetGraphAsync(BusinessId businessId);
+    TEntity? Get(TId id);
+    Task<TEntity?> GetAsync(TId id, CancellationToken cancellationToken);
+    TEntity? Get(BusinessId businessId);
+    Task<TEntity?> GetAsync(BusinessId businessId, CancellationToken cancellationToken);
+    TEntity? GetGraph(TId id);
+    Task<TEntity?> GetGraphAsync(TId id, CancellationToken cancellationToken);
+    TEntity? GetGraph(BusinessId businessId);
+    Task<TEntity?> GetGraphAsync(BusinessId businessId, CancellationToken cancellationToken);
     bool Exists(Expression<Func<TEntity, bool>> expression);
-    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression);
+    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
 }

@@ -9,6 +9,6 @@ public class PersonConfig : IEntityTypeConfiguration<Person>
             .HasConversion(c => c.Value, c => new FirstName(c));
         builder
             .Property(c => c.LastName)
-            .HasConversion(c => c.Value, c => new LastName(c));
+            .HasConversion(c => c.Value, c => LastName.Create(c));
     }
 }

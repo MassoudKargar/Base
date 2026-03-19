@@ -6,11 +6,11 @@ namespace Base.Samples.Core.ApplicationServices.Products.Commands.CreateProductH
 public class CreateProductCommandHandler(BaseServices baseServices, IProductCommandRepository commandRepository) : CommandHandler<CreateProductCommand, long>(baseServices)
 
 {
-    public override async Task<CommandResult<long>> Handle(CreateProductCommand command)
+    public override async Task<CommandResult<long>> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         Product product = new(new Item(command.Item));
-        commandRepository.Insert(product);
-        await commandRepository.CommitAsync();
+        await commandRepository.InsertAsync(product, cancellationToken);
+        await commandRepository.CommitAsync(cancellationToken);
         return await OkAsync(product.Id);
     }
 }

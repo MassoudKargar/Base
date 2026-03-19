@@ -12,7 +12,7 @@ public class QueryDispatcherValidationDecorator(
     #endregion
 
     #region Query Dispatcher
-    public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query)
+    public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query, CancellationToken cancellationToken)
     {
         _logger.LogDebug(BaseEventId.QueryValidation, "Validating query of type {QueryType} With value {Query}  start at :{StartDateTime}", query.GetType(), query, DateTime.Now);
 
@@ -25,7 +25,7 @@ public class QueryDispatcherValidationDecorator(
         }
 
         _logger.LogDebug(BaseEventId.QueryValidation, "Validating query of type {QueryType} With value {Query}  finished at :{EndDateTime}", query.GetType(), query, DateTime.Now);
-        return await _queryDispatcher.Execute<TQuery, TData>(query);
+        return await _queryDispatcher.Execute<TQuery, TData>(query, cancellationToken);
     }
     #endregion
 

@@ -18,9 +18,9 @@ public abstract class CommandDispatcherDecorator : ICommandDispatcher
         _commandDispatcher = commandDispatcher;
     }
     #region Abstract Send Commands
-    public abstract Task<CommandResult> Send<TCommand>(TCommand command) where TCommand : class, ICommand;
+    public abstract Task<CommandResult> Send<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand;
 
-    public abstract Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command) where TCommand : class, ICommand<TData>;
+    public abstract Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand<TData>;
     #endregion
 }
 

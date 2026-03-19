@@ -1,6 +1,7 @@
 ﻿namespace Base.Infra.Data.Sql.Commands;
+
 public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContext)
-    : ICommandRepository<TEntity, TId>, IUnitOfWork
+    : ICommandRepository<TEntity, TId>
     where TEntity : AggregateRoot<TId>
     where TDbContext : BaseCommandDbContext
     where TId : struct,
@@ -11,144 +12,133 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
     IFormattable
 {
 
-    protected readonly TDbContext _dbContext = dbContext;
+    protected readonly TDbContext DbContext = dbContext;
 
 
     public void Delete(TId id)
     {
-        var entity = _dbContext.Set<TEntity>().Find(id);
-        _dbContext.Set<TEntity>().Remove(entity);
+        var entity = DbContext.Set<TEntity>().Find(id);
+        if (entity != null)
+        {
+            DbContext.Set<TEntity>().Remove(entity);
+        }
     }
 
     public void Delete(TEntity entity)
     {
-        _dbContext.Set<TEntity>().Remove(entity);
+        DbContext.Set<TEntity>().Remove(entity);
     }
 
     public void DeleteGraph(TId id)
     {
         var entity = GetGraph(id);
         if (entity is not null && !entity.Id.Equals(default))
-            _dbContext.Set<TEntity>().Remove(entity);
+            DbContext.Set<TEntity>().Remove(entity);
     }
 
     #region insert
 
     public void Insert(TEntity entity)
     {
-        _dbContext.Set<TEntity>().Add(entity);
+        DbContext.Set<TEntity>().Add(entity);
     }
 
-    public async Task InsertAsync(TEntity entity)
+    public async Task InsertAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        await _dbContext.Set<TEntity>().AddAsync(entity);
+        await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
     }
     #endregion
 
     #region Get Single Item
-    public TEntity Get(TId id)
+    public TEntity? Get(TId id)
     {
-        return _dbContext.Set<TEntity>().Find(id);
+        return DbContext.Set<TEntity>().Find(id);
     }
 
-    public TEntity Get(BusinessId businessId)
+    public TEntity? Get(BusinessId businessId)
     {
-        return _dbContext.Set<TEntity>().FirstOrDefault(c => c.BusinessId == businessId);
+        return DbContext.Set<TEntity>().FirstOrDefault(c => c.BusinessId == businessId);
     }
 
-    public async Task<TEntity> GetAsync(TId id)
+    public async Task<TEntity?> GetAsync(TId id, CancellationToken cancellationToken)
     {
-        return await _dbContext.Set<TEntity>().FindAsync(id);
+        return await DbContext.Set<TEntity>().FindAsync([id], cancellationToken: cancellationToken);
     }
 
-    public async Task<TEntity> GetAsync(BusinessId businessId)
+    public async Task<TEntity?> GetAsync(BusinessId businessId, CancellationToken cancellationToken)
     {
-        return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(c => c.BusinessId == businessId);
+        return await DbContext.Set<TEntity>().FirstOrDefaultAsync(c => c.BusinessId == businessId, cancellationToken);
     }
     #endregion
 
     #region Get single item with graph
-    public TEntity GetGraph(TId id)
+    public TEntity? GetGraph(TId id)
     {
-        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        var temp = graphPath.ToList();
-        foreach (var item in graphPath)
-        {
-            query = query.Include(item);
-        }
+        var graphPath = DbContext.GetIncludePaths(typeof(TEntity)).ToArray();
+        var query = DbContext.Set<TEntity>().AsQueryable();
+        query = graphPath.Aggregate(query, (current, item) => current.Include(item));
         return query.FirstOrDefault(c => c.Id.Equals(id));
     }
 
-    public TEntity GetGraph(BusinessId businessId)
+    public TEntity? GetGraph(BusinessId businessId)
     {
-        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        var temp = graphPath.ToList();
-        foreach (var item in graphPath)
-        {
-            query = query.Include(item);
-        }
+        var graphPath = DbContext.GetIncludePaths(typeof(TEntity)).ToArray();
+        var query = DbContext.Set<TEntity>().AsQueryable();
+        query = graphPath.Aggregate(query, (current, item) => current.Include(item));
         return query.FirstOrDefault(c => c.BusinessId == businessId);
     }
 
-    public async Task<TEntity> GetGraphAsync(TId id)
+    public async Task<TEntity?> GetGraphAsync(TId id, CancellationToken cancellationToken)
     {
-        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        foreach (var item in graphPath)
-        {
-            query = query.Include(item);
-        }
-        return await query.FirstOrDefaultAsync(c => c.Id.Equals(id));
+        var graphPath = DbContext.GetIncludePaths(typeof(TEntity));
+        var query = DbContext.Set<TEntity>().AsQueryable();
+        query = graphPath.Aggregate(query, (current, item) => current.Include(item));
+        return await query.FirstOrDefaultAsync(c => c.Id.Equals(id), cancellationToken);
     }
 
-    public async Task<TEntity> GetGraphAsync(BusinessId businessId)
+    public async Task<TEntity?> GetGraphAsync(BusinessId businessId, CancellationToken cancellationToken)
     {
-        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        foreach (var item in graphPath)
-        {
-            query = query.Include(item);
-        }
-        return await query.FirstOrDefaultAsync(c => c.BusinessId == businessId);
+        var graphPath = DbContext.GetIncludePaths(typeof(TEntity));
+        var query = DbContext.Set<TEntity>().AsQueryable();
+        query = graphPath.Aggregate(query, (current, item) => current.Include(item));
+        return await query.FirstOrDefaultAsync(c => c.BusinessId == businessId, cancellationToken);
     }
     #endregion
 
     #region Exists
     public bool Exists(Expression<Func<TEntity, bool>> expression)
     {
-        return _dbContext.Set<TEntity>().Any(expression);
+        return DbContext.Set<TEntity>().Any(expression);
     }
 
-    public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression)
+    public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
     {
-        return await _dbContext.Set<TEntity>().AnyAsync(expression);
+        return await DbContext.Set<TEntity>().AnyAsync(expression, cancellationToken);
     }
     #endregion
 
     #region Transaction management
     public int Commit()
     {
-        return _dbContext.SaveChanges();
+        return DbContext.SaveChanges();
     }
 
-    public Task<int> CommitAsync()
+    public Task<int> CommitAsync(CancellationToken cancellationToken)
     {
-        return _dbContext.SaveChangesAsync();
+        return DbContext.SaveChangesAsync(cancellationToken);
     }
     public void BeginTransaction()
     {
-        _dbContext.BeginTransaction();
+        DbContext.BeginTransaction();
     }
 
     public void CommitTransaction()
     {
-        _dbContext.CommitTransaction();
+        DbContext.CommitTransaction();
     }
     public void RollbackTransaction()
     {
-        _dbContext.RollbackTransaction();
+        DbContext.RollbackTransaction();
     }
     #endregion
 }

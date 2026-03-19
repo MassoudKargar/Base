@@ -12,7 +12,7 @@ public class CommandDispatcher(IServiceProvider serviceProvider, ILogger<Command
     #endregion
 
     #region Send Commands
-    public async Task<CommandResult> Send<TCommand>(TCommand command) where TCommand : class, ICommand
+    public async Task<CommandResult> Send<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand
     {
         _stopwatch.Start();
         try
@@ -20,7 +20,7 @@ public class CommandDispatcher(IServiceProvider serviceProvider, ILogger<Command
             _logger.LogDebug("Routing command of type {CommandType} With value {Command}  Start at {StartDateTime}", command.GetType(), command, DateTime.Now);
             var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
 
-            return await handler.Handle(command);
+            return await handler.Handle(command, cancellationToken);
 
         }
         catch (InvalidOperationException ex)
@@ -36,14 +36,14 @@ public class CommandDispatcher(IServiceProvider serviceProvider, ILogger<Command
 
     }
 
-    public async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command) where TCommand : class, ICommand<TData>
+    public async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand<TData>
     {
         _stopwatch.Start();
         try
         {
             _logger.LogDebug("Routing command of type {CommandType} With value {Command}  Start at {StartDateTime}", command.GetType(), command, DateTime.Now);
             var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand, TData>>();
-            return await handler.Handle(command);
+            return await handler.Handle(command,cancellationToken);
         }
         catch (Exception ex)
         {

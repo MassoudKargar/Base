@@ -12,7 +12,7 @@ public class CommandDispatcherValidationDecorator(
     #endregion
 
     #region Send Commands
-    public override async Task<CommandResult> Send<TCommand>(TCommand command)
+    public override async Task<CommandResult> Send<TCommand>(TCommand command, CancellationToken cancellationToken)
     {
         _logger.LogDebug(BaseEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
         var validationResult = Validate<TCommand, CommandResult>(command);
@@ -23,10 +23,10 @@ public class CommandDispatcherValidationDecorator(
             return validationResult;
         }
         _logger.LogDebug(BaseEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
-        return await _commandDispatcher.Send(command);
+        return await _commandDispatcher.Send(command, cancellationToken);
     }
 
-    public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command)
+    public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command, CancellationToken cancellationToken)
     {
         _logger.LogDebug(BaseEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
 
@@ -38,7 +38,7 @@ public class CommandDispatcherValidationDecorator(
             return validationResult;
         }
         _logger.LogDebug(BaseEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
-        return await _commandDispatcher.Send<TCommand, TData>(command);
+        return await _commandDispatcher.Send<TCommand, TData>(command, cancellationToken);
     }
     #endregion
 

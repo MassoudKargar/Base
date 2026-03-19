@@ -12,7 +12,7 @@ public abstract class QueryDispatcherDecorator : IQueryDispatcher
     #endregion
 
     #region Query Dispatcher
-    public abstract Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query) where TQuery : class, IQuery<TData>;
+    public abstract Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query, CancellationToken cancellationToken) where TQuery : class, IQuery<TData>;
     #endregion
 
     #region Methods

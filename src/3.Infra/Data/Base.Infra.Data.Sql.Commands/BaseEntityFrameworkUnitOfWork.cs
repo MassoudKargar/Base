@@ -15,9 +15,9 @@ public abstract class BaseEntityFrameworkUnitOfWork<TDbContext>(TDbContext dbCon
         return result;
     }
 
-    public async Task<int> CommitAsync()
+    public async Task<int> CommitAsync(CancellationToken cancellationToken)
     {
-        var result = await _dbContext.SaveChangesAsync();
+        var result = await _dbContext.SaveChangesAsync(cancellationToken);
         return result;
     }
 

@@ -50,7 +50,7 @@ public abstract class Entity<TId> : IAuditableEntity
         return left.Equals(right);
     }
 
-    public static bool operator !=(Entity<TId> left, Entity<TId> right)
+    public static bool operator !=(Entity<TId>? left, Entity<TId>? right)
         => !(right == left);
 
     #endregion

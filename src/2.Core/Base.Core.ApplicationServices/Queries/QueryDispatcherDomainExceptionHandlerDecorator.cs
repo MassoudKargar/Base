@@ -12,11 +12,11 @@ public class QueryDispatcherDomainExceptionHandlerDecorator(
     #endregion
 
     #region Query Dispatcher
-    public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query)
+    public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query, CancellationToken cancellationToken)
     {
         try
         {
-            var result = await _queryDispatcher.Execute<TQuery, TData>(query);
+            var result = await _queryDispatcher.Execute<TQuery, TData>(query, cancellationToken);
             return result;
 
         }

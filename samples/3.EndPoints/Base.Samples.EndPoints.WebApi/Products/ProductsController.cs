@@ -6,5 +6,6 @@ namespace Base.Samples.EndPoints.WebApi.Products;
 public class ProductsController : BaseController
 {
     [HttpPost]
-    public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command) => await Create<CreateProductCommand, long>(command);
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command, CancellationToken cancellationToken) => 
+        await Create<CreateProductCommand, long>(command, cancellationToken);
 }

@@ -41,5 +41,5 @@ public abstract class QueryHandler<TQuery, TData>(BaseServices baseServices) : I
         result.AddMessage(BaseServices.Translator[message, arguments]);
     }
 
-    public abstract Task<QueryResult<TData>> Handle(TQuery query);
+    public abstract Task<QueryResult<TData>> Handle(TQuery query, CancellationToken cancellationToken);
 }

@@ -7,6 +7,6 @@
 public interface IQueryHandler<in TQuery, TData>
     where TQuery : class, IQuery<TData>
 {
-    Task<QueryResult<TData>> Handle(TQuery request);
+    Task<QueryResult<TData>> Handle(TQuery request, CancellationToken cancellationToken);
 }
 
