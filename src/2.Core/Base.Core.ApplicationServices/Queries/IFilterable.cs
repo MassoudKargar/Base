@@ -1,4 +1,4 @@
-﻿namespace Base.Infra.Data.Sql.Queries;
+﻿namespace Base.Core.ApplicationServices.Queries;
 
 public interface IFilterable
 {

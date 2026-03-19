@@ -1,4 +1,6 @@
-﻿namespace Base.Infra.Data.Sql.Queries;
+﻿using System.Linq.Expressions;
+
+namespace Base.Core.ApplicationServices.Queries;
 
 public static class SortExtensions
 {
@@ -6,14 +8,7 @@ public static class SortExtensions
         where T : class
     {
         KeyValuePair<string, Expression<Func<T, object>>> sortFunc = sortFunctions.FirstOrDefault(k => k.Key.Equals(propertyName, StringComparison.InvariantCultureIgnoreCase));
-        if (direction == SortDirection.Asc)
-        {
-            query = query.OrderBy(sortFunc.Value);
-        }
-        else
-        {
-            query = query.OrderByDescending(sortFunc.Value);
-        }
+        query = direction == SortDirection.Asc ? query.OrderBy(sortFunc.Value) : query.OrderByDescending(sortFunc.Value);
         return query;
     }
 }

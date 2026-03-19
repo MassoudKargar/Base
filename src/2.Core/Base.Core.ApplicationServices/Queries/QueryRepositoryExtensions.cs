@@ -1,4 +1,6 @@
-﻿namespace Base.Infra.Data.Sql.Queries;
+﻿using Base.Utility.Extensions;
+
+namespace Base.Core.ApplicationServices.Queries;
 
 public static class QueryRepositoryExtensions
 {
@@ -10,14 +12,14 @@ public static class QueryRepositoryExtensions
             PageSize = query.PageSize
         };
         if (query.NeedTotalCount)
-            result.TotalCount = await entities.CountAsync();
+            result.TotalCount = entities.LongCount();
 
         if (!string.IsNullOrWhiteSpace(query.SortBy))
             entities = entities.OrderByField(query.SortBy, query.SortAscending);
         entities = entities.Skip(query.SkipCount).Take(query.PageSize);
 
-        result.QueryResult = await entities.Select(
-               c => selectFunc(c)).ToListAsync();
+        result.QueryResult = entities.Select(
+               c => selectFunc(c)).AsEnumerable();
         return result;
     }
 }

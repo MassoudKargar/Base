@@ -1,4 +1,6 @@
-﻿namespace Base.Infra.Data.Sql.Queries;
+﻿using System.Reflection;
+
+namespace Base.Core.ApplicationServices.Queries;
 
 public abstract class PagedSortableQueryFilter<T> : IFilterable where T : ISortablePropertyCollection
 {

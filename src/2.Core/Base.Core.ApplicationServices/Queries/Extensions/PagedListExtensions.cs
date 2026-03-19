@@ -1,4 +1,6 @@
-﻿namespace Base.Infra.Data.Sql.Queries.Extensions;
+﻿using System.Linq.Dynamic.Core;
+
+namespace Base.Core.ApplicationServices.Queries.Extensions;
 public static class PagedListExtensions
 {
     public static async Task<PagedCollectionQueryResult<TSource>> ToPagedListAsync<TSource, TSortablePropertyCollection>(
@@ -9,7 +11,7 @@ public static class PagedListExtensions
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        long totalItems = await source.LongCountAsync(cancellationToken);
+        long totalItems = source.LongCount();
 
         if (request.Ordering != null)
         {

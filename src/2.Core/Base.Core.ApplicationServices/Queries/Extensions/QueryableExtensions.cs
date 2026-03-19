@@ -1,4 +1,6 @@
-﻿namespace Base.Infra.Data.Sql.Queries.Extensions;
+﻿using System.Linq.Dynamic.Core;
+
+namespace Base.Core.ApplicationServices.Queries.Extensions;
 
 public static class QueryableExtensions
 {
