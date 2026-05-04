@@ -1,6 +1,6 @@
 ﻿namespace Base.Samples.Core.ApplicationServices.People.Commands.CreatePersonHandlers;
 
-public class CreatePersonHandler(BaseServices baseServices, IPersonCommandRepository repository) : CommandHandler<CreatePerson, long>(baseServices)
+public class CreatePersonCommandHandler(BaseServices baseServices, IPersonCommandRepository repository) : CommandHandler<CreatePerson, long>(baseServices)
 {
 
     public override async Task<CommandResult<long>> Handle(CreatePerson command, CancellationToken cancellationToken)
