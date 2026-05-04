@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.Translations.Abstractions;
+﻿namespace Base.Extensions.Translations;
 
 public interface ITranslator
 {

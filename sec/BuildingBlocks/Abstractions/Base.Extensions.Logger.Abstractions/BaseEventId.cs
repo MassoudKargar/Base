@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.Logger.Abstractions;
+﻿namespace Base.Extensions.Logger;
 public class BaseEventId
 {
     public const int PerformanceMeasurement = 1001;

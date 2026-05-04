@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.Serializers.Abstractions;
+﻿namespace Base.Extensions.Serializers;
 
 public interface IJsonSerializer
 {

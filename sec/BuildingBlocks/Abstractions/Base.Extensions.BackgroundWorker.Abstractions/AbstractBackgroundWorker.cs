@@ -1,7 +1,6 @@
-﻿
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 
-namespace Base.Extensions.BackgroundWorker.Abstractions;
+namespace Base.Extensions.BackgroundWorker;
 
 public abstract class AbstractBackgroundWorker : IHostedService, IDisposable
 

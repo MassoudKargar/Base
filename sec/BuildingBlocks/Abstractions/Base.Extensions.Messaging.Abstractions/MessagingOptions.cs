@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.Messaging.Abstractions;
+﻿namespace Base.Extensions.Messaging;
 
 public class MessagingOptions
 {

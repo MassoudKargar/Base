@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.ChangeDataLog.Abstractions;
+﻿namespace Base.Extensions.ChangeDataLog;
 public class PropertyChangeLogItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();

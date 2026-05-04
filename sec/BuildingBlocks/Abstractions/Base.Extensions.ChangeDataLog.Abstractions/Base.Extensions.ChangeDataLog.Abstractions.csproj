@@ -12,6 +12,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>base.png</PackageIcon>
+		<RootNamespace>$(MSBuildProjectName.Replace(".Abstractions","").Replace(" ", "_"))</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="../../../../README.md" Pack="true" PackagePath="" />

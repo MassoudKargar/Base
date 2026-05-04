@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.DependencyInjection.Abstractions;
+﻿namespace Base.Extensions.DependencyInjection;
 
 public interface ITransientLifetime
 {

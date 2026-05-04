@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Base.Extensions.Serializers.Abstractions;
+namespace Base.Extensions.Serializers;
 public interface IExcelSerializer
 {
     byte[] ListToExcelByteArray<T>(List<T> list, string sheetName = "Result");

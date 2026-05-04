@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.ChangeDataLog.Abstractions;
+﻿namespace Base.Extensions.ChangeDataLog;
 public enum DatabaseChangeType
 {
     Insert = 1,

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Version>10.0.0</Version>
+		<Authors>Masoud kargar</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>base.png</PackageIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="../../../README.md" Pack="true" PackagePath="" />
+		<None Include="../../../base.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="9.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Base.EndPoints\Base.EndPoints.csproj" />
+	</ItemGroup>
+</Project>
