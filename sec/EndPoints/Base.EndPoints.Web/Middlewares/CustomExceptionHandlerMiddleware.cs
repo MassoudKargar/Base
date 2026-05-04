@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using Base.Core.Application.Exceptions;
+using Base.EndPoints.Web.Results;
 
 namespace Base.EndPoints.Web.Middlewares;
 
