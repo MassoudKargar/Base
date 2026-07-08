@@ -24,7 +24,6 @@ global using Base.Samples.Infra.Data.Sql.Queries.Common;
 global using Microsoft.AspNetCore.Cors.Infrastructure;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
-global using Microsoft.OpenApi.Models;
 
 
 global using Swashbuckle.AspNetCore.SwaggerGen;

@@ -1,4 +1,6 @@
-﻿namespace Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Extensions;
+﻿using Microsoft.OpenApi;
+
+namespace Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Extensions;
 
 public static class SwaggerExtensions
 {

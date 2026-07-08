@@ -1,38 +1,31 @@
 ﻿namespace Base.Extensions.DependencyInjection;
+
 public static class OpenTelemetryServiceCollectionExtensions
 {
-    public static WebApplicationBuilder AddObservability(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddObservability(
+        this WebApplicationBuilder builder,
+        OpenTelemetryOptions? options = null)
     {
-        var configuration = builder.Configuration;
+        var observabilityOptions = options ?? new OpenTelemetryOptions();
 
-        OpenTelemetryOptions observabilityOptions = new()
-        {
-            ApplicationName = "Base",
-            ServiceName = "OpenTelemetrySample",
-            ServiceVersion = "1.0.0",
-            ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98",
-            OltpEndpoint = "http://localhost:4317",
-            ExportProcessorType = ExportProcessorType.Simple,
-            SamplingProbability = 1
-        };
+        var section = builder.Configuration.GetSection(nameof(OpenTelemetryOptions));
 
-        var config = configuration.GetValue<OpenTelemetryOptions>(nameof(OpenTelemetryOptions));
-        if (config != null)
+        if (section.Exists())
         {
-            configuration
-                .GetRequiredSection(nameof(OpenTelemetryOptions))
-                .Bind(observabilityOptions);
+            section.Bind(observabilityOptions);
         }
-        
+
         builder.Services
             .AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(observabilityOptions.ServiceName))
+            .ConfigureResource(resource =>
+                resource.AddService(observabilityOptions.ServiceName))
             .AddMetrics(observabilityOptions)
             .AddTracing(observabilityOptions)
             .AddLogging(observabilityOptions);
 
         return builder;
     }
+
     private static OpenTelemetryBuilder AddLogging(this OpenTelemetryBuilder builder, OpenTelemetryOptions observabilityOptions)
     {
 
@@ -107,7 +100,7 @@ public static class OpenTelemetryServiceCollectionExtensions
 
                 });
         });
-        builder.Services.AddScoped<MetricReporter>(sp => 
+        builder.Services.AddScoped<MetricReporter>(sp =>
         {
             var options = sp.GetRequiredService<IOptions<OpenTelemetryOptions>>().Value;
             return new MetricReporter(options.ServiceName, "http");

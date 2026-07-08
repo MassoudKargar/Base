@@ -12,6 +12,7 @@ mkdir nupkgs
 
 REM شمارنده پروژه‌های پیدا شده
 set foundCount=0
+set failedCount=0
 
 echo Searching all subfolders for .csproj files...
 
@@ -23,8 +24,13 @@ for /r %%P in (*.csproj) do (
     echo !projName! | findstr /i "Sample" >nul
     if errorlevel 1 (
         echo Packing project: %%P
-        dotnet pack "%%P" -o nupkgs
-        set /a foundCount+=1
+        dotnet pack "%%P" -c Release -o nupkgs /p:GeneratePackageOnBuild=false
+        if errorlevel 1 (
+            echo Failed packing project: %%P
+            set /a failedCount+=1
+        ) else (
+            set /a foundCount+=1
+        )
     ) else (
         echo Skipping sample project: %%P
     )
@@ -32,8 +38,12 @@ for /r %%P in (*.csproj) do (
 
 if %foundCount%==0 (
     echo No eligible .csproj files found to pack.
+) else if %failedCount%==0 (
+    echo Packed %foundCount% projects successfully.
 ) else (
     echo Packed %foundCount% projects successfully.
+    echo Failed packing %failedCount% projects.
+    exit /b 1
 )
 
 echo All done!
