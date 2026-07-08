@@ -8,8 +8,6 @@ global using Base.Core.Contracts.Data.Queries;
 global using Base.EndPoints.Web.Middlewares.ApiExceptionHandler;
 global using Base.Utility;
 
-global using FluentValidation.AspNetCore;
-
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.Data.SqlClient;

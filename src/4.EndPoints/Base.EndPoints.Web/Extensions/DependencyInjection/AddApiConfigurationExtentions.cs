@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿using FluentValidation.AspNetCore;
+
+namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class AddApiConfigurationExtensions
 {

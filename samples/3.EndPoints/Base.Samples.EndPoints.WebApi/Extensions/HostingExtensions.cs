@@ -59,7 +59,7 @@ public static class HostingExtensions
         //builder.Services.AddMessageInboxDalSql(configuration, "MessageInboxSqlStore");
         //builder.Services.AddMessageInbox(configuration, "MessageInbox");
 
-        builder.Services.AddBaseRabbitMqMessageBus(configuration, "RabbitMq");
+        //builder.Services.AddBaseRabbitMqMessageBus(configuration, "RabbitMq");
 
         //builder.Services.AddTraceJeager(configuration, "OpenTelemetry");
 
