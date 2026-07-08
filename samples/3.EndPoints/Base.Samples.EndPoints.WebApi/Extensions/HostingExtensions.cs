@@ -1,4 +1,6 @@
-﻿namespace Base.Samples.EndPoints.WebApi.Extensions;
+﻿using Base.EndPoints.Web.Extensions.Swaggers.Extensions;
+
+namespace Base.Samples.EndPoints.WebApi.Extensions;
 
 public static class HostingExtensions
 {
@@ -65,7 +67,7 @@ public static class HostingExtensions
 
         //builder.Services.AddIdentityServer(configuration, "OAuth");
 
-        builder.Services.AddSwagger(configuration, "Swagger");
+        builder.Services.AddOpenApiDocumentation(configuration, "OpenApi");
 
         return builder.Build();
     }
@@ -77,7 +79,7 @@ public static class HostingExtensions
         app.UseBaseObservabilityMiddleware();
         app.UseBaseApiExceptionHandler();
 
-        app.UseSwaggerUI("Swagger");
+        app.UseOpenApiDocumentation("OpenApi");
 
         app.UseStatusCodePages();
 

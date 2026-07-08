@@ -26,8 +26,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.2.3" />
     <PackageReference Include="Base.Extensions.Caching.InMemory" Version="10.0.0" />
     <PackageReference Include="Base.Extensions.Events.PollingPublisher" Version="10.0.0" />
     <PackageReference Include="Base.Extensions.Events.PollingPublisher.Dal.Dapper" Version="10.0.0" />

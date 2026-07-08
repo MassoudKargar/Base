@@ -15,9 +15,6 @@ global using Base.Samples.EndPoints.WebApi.CustomDecorators;
 global using Base.Samples.EndPoints.WebApi.Extensions;
 global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.IdentityServer.Extensions;
 global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.IdentityServer.Options;
-global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Extensions;
-global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Filters;
-global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Options;
 global using Base.Samples.Infra.Data.Sql.Commands.Common;
 global using Base.Samples.Infra.Data.Sql.Queries.Common;
 
@@ -26,8 +23,6 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 
 
-global using Swashbuckle.AspNetCore.SwaggerGen;
-global using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Base;
 
