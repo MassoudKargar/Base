@@ -1,7 +1,7 @@
 # Base
 
 <p align="center">
-  <img src="./base.png" alt="Base Architecture" />
+  <img src="./document.png" alt="Base Architecture" />
 </p>
 
 Base is a clean architecture starter framework for building maintainable .NET applications.  
