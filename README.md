@@ -150,7 +150,7 @@ This repository is clearly centered around modern .NET development and currently
 
 The image below is a suitable visual banner for the repository because it communicates the exact intent of the base framework: clean architecture, DDD, gRPC, Redis, Quartz, observability, and deployment flow.
 
-![Base Architecture](./base.png)
+![Base Architecture](./document.png)
 
 ## License
 
