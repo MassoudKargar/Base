@@ -1,4 +1,3 @@
-```md
 # Base
 
 <p align="center">
@@ -160,4 +159,3 @@ This project is licensed under the MIT License.
 ## Repository note
 
 The repository currently contains a very minimal README on the `upgrade/dotnet-10` branch, so replacing it with a full project description will make the repo much more useful to visitors and contributors.
-```
