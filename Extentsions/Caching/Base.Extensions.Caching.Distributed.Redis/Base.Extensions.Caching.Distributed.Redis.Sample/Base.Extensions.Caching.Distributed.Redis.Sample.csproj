@@ -7,8 +7,8 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="10.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Extensions.Caching.Distributed.Redis\Base.Extensions.Caching.Distributed.Redis.csproj" />

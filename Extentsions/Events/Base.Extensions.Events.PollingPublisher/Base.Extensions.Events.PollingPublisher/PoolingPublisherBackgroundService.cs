@@ -27,22 +27,19 @@ public class PoolingPublisherBackgroundService : BackgroundService
                 foreach (var item in outboxItems)
                 {
                     using Activity trace = StartChildActivity(item);
-                    _sendMessageBus.Send(new Parcel
-                    {
-                        CorrelationId = item.AggregateId,
-                        MessageBody = item.EventPayload,
-                        MessageId = item.EventId.ToString(),
-                        MessageName = item.EventName,
-                        Route = $"{_options.ApplicationName}.event.{item.EventName}",
-                        Headers = new Dictionary<string, object>
-                        {
-                            ["AccuredByUserId"] = item.AccuredByUserId,
-                            ["AccuredOn"] = item.AccruedOn.ToString(),
-                            ["AggregateName"] = item.AggregateName,
-                            ["AggregateTypeName"] = item.AggregateTypeName,
-                            ["EventTypeName"] = item.EventTypeName,
-                        }
-                    });
+                   await _sendMessageBus.SendAsync(new Parcel(
+                       item.EventName, 
+                       item.EventPayload,
+                       $"{_options.ApplicationName}.event.{item.EventName}", 
+                       item.AggregateId,
+                       headers: new Dictionary<string, string>
+                       {
+                           ["AccuredByUserId"] = item.AccuredByUserId,
+                           ["AccuredOn"] = item.AccruedOn.ToString(),
+                           ["AggregateName"] = item.AggregateName,
+                           ["AggregateTypeName"] = item.AggregateTypeName,
+                           ["EventTypeName"] = item.EventTypeName,
+                       }));
                     item.IsProcessed = true;
                     _logger.LogDebug("event {eventName} with {EventId} sent from {ApplicaotinName} at {DateTime}", item.EventName, item.EventId, _options.ApplicationName, DateTime.Now);
                 }

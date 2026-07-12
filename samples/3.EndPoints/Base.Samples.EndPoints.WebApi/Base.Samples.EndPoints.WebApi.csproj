@@ -15,6 +15,7 @@
     <None Remove="Events\**" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
     <PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="10.0.0" />
     <PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" />

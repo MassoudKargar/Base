@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Utility.Auth.ApiAuthentication" Version="9.0.0" />
+    <PackageReference Include="Base.Utility.Auth.ApiAuthentication" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Utility.Swagger.Registration\Base.Utility.Swagger.Registration.csproj" />

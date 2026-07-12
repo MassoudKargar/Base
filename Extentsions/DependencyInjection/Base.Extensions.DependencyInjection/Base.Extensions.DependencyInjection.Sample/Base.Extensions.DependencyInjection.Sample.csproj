@@ -7,7 +7,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Extensions.DependencyInjection\Base.Extensions.DependencyInjection.csproj" />

@@ -1,5 +1,5 @@
-using Microsoft.OpenApi.Models;
 using Base.Extensions.DependencyInjection;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
