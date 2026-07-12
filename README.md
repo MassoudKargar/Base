@@ -19,15 +19,13 @@ A production-ready foundation for building modern .NET applications using Clean 
 </p>
 
 ---
-
 # Overview
 
-**Base** is an opinionated application framework for building scalable, maintainable, and enterprise-grade .NET applications.
+Base is a modern application framework for .NET that provides a robust starting point for building scalable, maintainable, and enterprise-grade applications.
 
-Instead of starting every project from scratch, Base provides a clean and extensible architecture with reusable infrastructure components, allowing developers to focus on business logic rather than project setup.
+It embraces **Clean Architecture**, **Domain-Driven Design (DDD)**, and **CQRS** to promote clear boundaries between business logic and infrastructure concerns. The framework includes reusable components, modular project organization, and production-ready conventions that help teams build software faster while maintaining high code quality.
 
-Whether you're building a REST API, Modular Monolith, or Microservices platform, Base gives you a solid starting point.
-
+Base is suitable for REST APIs, Modular Monoliths, and Microservice-based systems, making it an ideal foundation for both greenfield projects and enterprise solutions.
 ---
 
 # Goals
@@ -163,7 +161,7 @@ Contains:
 ---
 
 # Features
-
+- ✅ About → Website → https://www.nuget.org/packages/Base.Solution.Templates/
 - ✅ Clean Architecture
 - ✅ DDD
 - ✅ CQRS
