@@ -1,161 +1,361 @@
 # Base
 
 <p align="center">
-  <img src="./document.png" alt="Base Architecture" />
+  <img src="./document.png" alt="Base Architecture" width="100%">
 </p>
 
-Base is a clean architecture starter framework for building maintainable .NET applications.  
-This repository is currently aligned with the `upgrade/dotnet-10` branch and is designed to help you start from a structured foundation instead of a scattered project layout.
+<p align="center">
 
-## What this project is for
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet)
+![C#](https://img.shields.io/badge/C%23-13-239120?logo=csharp)
+![License](https://img.shields.io/github/license/MassoudKargar/Base)
+![Last Commit](https://img.shields.io/github/last-commit/MassoudKargar/Base)
+![Issues](https://img.shields.io/github/issues/MassoudKargar/Base)
 
-This base template is meant for teams and developers who want:
+</p>
 
-- a clean separation of concerns
-- a predictable project structure
-- DDD-friendly layering
-- extensibility for real-world applications
-- a foundation that can evolve from simple services to microservices
+<p align="center">
+A production-ready foundation for building modern .NET applications using Clean Architecture, DDD, CQRS, and modular design.
+</p>
 
-The goal is not to provide a toy sample. The goal is to provide a reusable starting point for production-oriented development.
+---
 
-## Architecture overview
+# Overview
 
-The repository is organized around a clean and modular structure:
+**Base** is an opinionated application framework for building scalable, maintainable, and enterprise-grade .NET applications.
 
-- **Application layer** for use cases, orchestration, and business workflows
-- **Domain layer** for entities, value objects, aggregates, and domain rules
-- **Infrastructure layer** for persistence, messaging, external systems, and implementation details
-- **API / endpoints** for exposing the application to consumers
-- **Shared utilities and extensions** for cross-cutting concerns
+Instead of starting every project from scratch, Base provides a clean and extensible architecture with reusable infrastructure components, allowing developers to focus on business logic rather than project setup.
 
-In other words: business logic stays protected, infrastructure stays replaceable, and APIs stay thin.
+Whether you're building a REST API, Modular Monolith, or Microservices platform, Base gives you a solid starting point.
 
-## Included concepts
+---
 
-Depending on the modules you use from the base framework, the solution is designed to support patterns such as:
+# Goals
 
-- Clean Architecture
-- Domain-Driven Design
+- Clean Architecture by default
+- Domain-Driven Design (DDD)
+- CQRS support
+- Dependency Injection
+- Modular project structure
+- Production-ready conventions
+- High maintainability
+- Testability
+- Reusable infrastructure
+- Extensible architecture
+
+---
+
+# Architecture
+
+```
+                   Client
+                      │
+                      ▼
+              ASP.NET Core API
+                      │
+                      ▼
+              Application Layer
+                      │
+         ┌────────────┴────────────┐
+         ▼                         ▼
+    Domain Layer          Infrastructure
+         │                         │
+         └────────────┬────────────┘
+                      ▼
+               External Services
+
+        SQL Server
+        Redis
+        RabbitMQ
+        Kafka
+        gRPC
+        Background Jobs
+```
+
+---
+
+# Project Structure
+
+```
+Base
+│
+├── src
+│   ├── Base.Domain
+│   ├── Base.Application
+│   ├── Base.Infrastructure
+│   ├── Base.API
+│   ├── Base.Shared
+│   └── ...
+│
+├── samples
+│
+├── Utilities
+│
+├── docs
+│
+└── tests
+```
+
+---
+
+# Layers
+
+## Domain
+
+Contains:
+
+- Entities
+- Value Objects
+- Aggregates
+- Domain Events
+- Business Rules
+- Interfaces
+
+The Domain layer has **zero dependency** on any external technology.
+
+---
+
+## Application
+
+Responsible for:
+
 - CQRS
-- modular project organization
-- reusable infrastructure helpers
-- background jobs
-- messaging integration
-- observability-ready design
+- Commands
+- Queries
+- DTOs
+- Validation
+- Business Workflows
+- Authorization
+- Mediation
 
-## Repository structure
+---
 
-Typical top-level folders include:
+## Infrastructure
 
-- `src` — main source code
-- `samples` — example usages and reference implementations
-- `Utility` — helper tools and supporting utilities
-- `Extentsions` — framework extensions and reusable building blocks
+Implements:
 
-There are also solution-level files such as:
+- Entity Framework
+- Redis
+- RabbitMQ
+- Kafka
+- Email
+- SMS
+- File Storage
+- Background Jobs
+- External APIs
 
-- `Base.sln`
-- `README.md`
-- `LICENSE`
-- Docker-related files
-- package/build helper scripts
+Infrastructure depends on Domain—not the other way around.
 
-## How the base is intended to work
+---
 
-The framework is built so that your application code does not depend directly on the outer technical concerns.
+## API
 
-A practical flow looks like this:
+Contains:
 
-1. A client calls an API endpoint.
-2. The endpoint delegates to an application use case.
-3. The application layer coordinates the operation.
-4. The domain layer enforces business rules.
-5. Infrastructure handles database, cache, queue, or external service access.
-6. Cross-cutting concerns are applied without polluting business logic.
+- REST APIs
+- Authentication
+- Authorization
+- Swagger
+- Middleware
+- Exception Handling
+- Health Checks
 
-That is the core value of the template.
+---
 
-## Why this structure matters
+# Features
 
-A lot of .NET projects start fast and become painful later because everything is mixed together.  
-This base tries to prevent that by enforcing boundaries early.
+- ✅ Clean Architecture
+- ✅ DDD
+- ✅ CQRS
+- ✅ Dependency Injection
+- ✅ Fluent Validation
+- ✅ Authentication
+- ✅ Authorization
+- ✅ JWT
+- ✅ Swagger
+- ✅ Global Exception Handling
+- ✅ Logging
+- ✅ Background Jobs
+- ✅ Redis
+- ✅ RabbitMQ
+- ✅ Kafka Ready
+- ✅ gRPC Ready
+- ✅ Docker Ready
+- ✅ OpenTelemetry Ready
 
-Benefits:
+---
 
-- easier maintenance
-- easier testing
-- less coupling
-- clearer ownership of responsibilities
-- safer refactoring
-- better long-term scalability
+# Technology Stack
 
-## Current branch
+| Technology | Purpose |
+|------------|----------|
+| .NET 10 | Framework |
+| ASP.NET Core | Web API |
+| C# | Language |
+| Entity Framework Core | ORM |
+| SQL Server | Database |
+| Redis | Cache |
+| RabbitMQ | Messaging |
+| Kafka | Event Streaming |
+| gRPC | Internal Communication |
+| Docker | Containerization |
+| OpenTelemetry | Observability |
 
-This README applies to the `upgrade/dotnet-10` branch, which indicates the project is being aligned with the .NET 10 upgrade path.
+---
 
-That matters because framework versions change APIs, hosting behavior, package compatibility, and deployment assumptions. A clean base template is especially useful during such upgrades because it reduces the risk of upgrade-related chaos spreading across the solution.
+# Design Principles
 
-## Example use cases
+Base follows several important architectural principles:
 
-You can use this base for:
+- Separation of Concerns
+- Single Responsibility
+- Dependency Inversion
+- Domain First
+- Infrastructure Isolation
+- Explicit Dependencies
+- High Cohesion
+- Low Coupling
 
-- CRUD business applications
-- internal enterprise systems
-- notification services
-- HR / payroll services
-- microservice backends
-- modular monoliths
-- API-first products
+---
 
-## Getting started
+# Why Base?
 
-A typical workflow is:
+Many templates only generate folders.
 
-1. Clone the repository.
-2. Restore dependencies.
-3. Build the solution.
-4. Run the sample or target service.
-5. Replace sample modules with your own business modules.
-6. Keep the architecture boundaries intact.
+Base provides:
 
-## Design principles
+- Consistent project organization
+- Proven architectural patterns
+- Reusable infrastructure
+- Extensible modules
+- Enterprise-ready conventions
+- Better maintainability
+- Faster project startup
+- Easier onboarding for teams
 
-This framework follows a few strict rules:
+---
 
-- domain logic should not depend on infrastructure
-- application logic should not be aware of delivery details
-- endpoints should be thin
-- reusable code should be extracted into shared modules
-- technical concerns should be isolated
-- the structure should remain readable as the codebase grows
+# Typical Request Flow
 
-## If you are extending the base
+```
+Client
+   │
+   ▼
+Controller / Endpoint
+   │
+   ▼
+Application Layer
+   │
+   ▼
+Domain
+   │
+   ▼
+Infrastructure
+   │
+   ▼
+Database / Cache / Queue
+```
 
-When adding new features, prefer this order:
+---
 
-- define the business need in the domain
-- implement the use case in the application layer
-- connect persistence or messaging in infrastructure
-- expose it through the endpoint layer
-- keep external dependencies behind abstractions
+# Extensibility
 
-That approach keeps the template clean instead of turning it into another monolith with folders.
+The framework is designed to allow easy integration of:
 
-## Technology direction
+- New Modules
+- New Databases
+- New Message Brokers
+- New Cache Providers
+- New Authentication Providers
+- New External Services
 
-This repository is clearly centered around modern .NET development and currently contains a codebase dominated by C# with a small Dockerfile/HTML footprint.
+without affecting the Domain layer.
 
-## Screenshot / banner
+---
 
-The image below is a suitable visual banner for the repository because it communicates the exact intent of the base framework: clean architecture, DDD, gRPC, Redis, Quartz, observability, and deployment flow.
+# Getting Started
 
-![Base Architecture](./document.png)
+Clone the repository
 
-## License
+```bash
+git clone https://github.com/MassoudKargar/Base.git
+```
+Restore packages
 
-This project is licensed under the MIT License.
+```bash
+dotnet restore
+```
 
-## Repository note
+Build
 
-The repository currently contains a very minimal README on the `upgrade/dotnet-10` branch, so replacing it with a full project description will make the repo much more useful to visitors and contributors.
+```bash
+dotnet build
+```
+
+Run
+
+```bash
+dotnet run
+```
+
+---
+
+# Best Practices
+
+When building on Base:
+
+- Keep business rules inside Domain.
+- Keep Controllers thin.
+- Use CQRS for application workflows.
+- Hide infrastructure behind abstractions.
+- Avoid leaking Entity Framework into Application.
+- Depend on interfaces, not implementations.
+
+---
+
+# Future Roadmap
+
+- [ ] Native AOT support
+- [ ] Multi-tenancy
+- [ ] Event Sourcing
+- [ ] Outbox Pattern
+- [ ] Saga Support
+- [ ] Modular Monolith template
+- [ ] Microservices template
+- [ ] Distributed Caching improvements
+- [ ] Observability Dashboard
+- [ ] CLI Project Generator
+
+---
+
+# Contributing
+
+Contributions are welcome.
+
+Feel free to submit issues, feature requests, or pull requests.
+
+---
+
+# License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# Author
+
+**Masoud Kargar**
+
+Senior .NET Backend Developer
+
+GitHub:
+https://github.com/MassoudKargar
+
+LinkedIn:
+https://www.linkedin.com/in/masoudkargar
+
+---
+
+<p align="center">
+Made with ❤️ using .NET 10
+</p>
