@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
@@ -18,4 +18,9 @@
 		<None Include="../../../../README.md" Pack="true" PackagePath="" />
 		<None Include="../../../../base.png" Pack="true" PackagePath="" />
 	</ItemGroup>
+
+  <!-- Keep legacy Extension contracts in the single canonical package. -->
+  <ItemGroup>
+    <Compile Include="..\..\..\..\Extentsions\Base.Extensions.Abstractions\Base.Extensions.Serializers.Abstractions\**\*.cs" Exclude="..\..\..\..\Extentsions\Base.Extensions.Abstractions\Base.Extensions.Serializers.Abstractions\**\obj\**;..\..\..\..\Extentsions\Base.Extensions.Abstractions\Base.Extensions.Serializers.Abstractions\**\bin\**" Link="Compatibility\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
 </Project>

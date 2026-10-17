@@ -1,5 +1,5 @@
-﻿namespace Base.Extensions.ChangeDataLog.Sql;
-public class DapperEntityChangeInterceptorItemRepository : IEntityChangeInterceptorItemRepository
+namespace Base.Extensions.ChangeDataLog.Sql;
+public class DapperEntityChangeInterceptorItemRepository : global::Base.Extensions.ChangeDataLog.Abstractions.IEntityChangeInterceptorItemRepository
 {
     private readonly ChangeDataLogSqlOptions _options;
     private readonly IDbConnection _dbConnection;
@@ -20,7 +20,7 @@ public class DapperEntityChangeInterceptorItemRepository : IEntityChangeIntercep
         InsertPropertyChangeLogItemCommand = string.Format(InsertPropertyChangeLogItemCommand, _options.SchemaName, _options.PropertyTableName);
     }
 
-    public void Save(List<EntityChangeInterceptorItem> entityChageInterceptorItems)
+    public void Save(List<global::Base.Extensions.ChangeDataLog.Abstractions.EntityChangeInterceptorItem> entityChageInterceptorItems)
     {
         foreach (var item in entityChageInterceptorItems)
         {
@@ -42,7 +42,7 @@ public class DapperEntityChangeInterceptorItemRepository : IEntityChangeIntercep
 
     }
 
-    public Task SaveAsync(List<EntityChangeInterceptorItem> entityChageInterceptorItems)
+    public Task SaveAsync(List<global::Base.Extensions.ChangeDataLog.Abstractions.EntityChangeInterceptorItem> entityChageInterceptorItems)
     {
         throw new NotImplementedException();
     }

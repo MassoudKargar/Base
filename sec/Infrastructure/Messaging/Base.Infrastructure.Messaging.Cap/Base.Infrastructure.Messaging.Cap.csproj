@@ -25,12 +25,12 @@
 		<PackageReference Include="DotNetCore.CAP.InMemoryStorage" Version="10.0.1" />
 		<PackageReference Include="DotNetCore.CAP.Kafka" Version="10.0.1" />
 		<PackageReference Include="DotNetCore.CAP.Dashboard" Version="10.0.1" />
-		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.2" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.20.0" />
 		<PackageReference Include="Savorboard.CAP.InMemoryMessageQueue" Version="10.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.13" />
 
-		<PackageReference Include="OpenTelemetry" Version="1.15.3" />
-		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.15.3" />
+		<PackageReference Include="OpenTelemetry" Version="1.20.0" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.20.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\BuildingBlocks\Abstractions\Base.Extensions.Messaging.Abstractions\Base.Extensions.Messaging.Abstractions.csproj" />

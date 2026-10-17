@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
@@ -20,7 +20,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.8" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.13" />
 	</ItemGroup>
 
+
+  <!-- Keep legacy Extension contracts in the single canonical package. -->
+  <ItemGroup>
+    <Compile Include="..\..\..\..\Extentsions\Base.Extensions.Abstractions\Base.Extensions.BackgroundWorker.Abstractions\**\*.cs" Exclude="..\..\..\..\Extentsions\Base.Extensions.Abstractions\Base.Extensions.BackgroundWorker.Abstractions\**\obj\**;..\..\..\..\Extentsions\Base.Extensions.Abstractions\Base.Extensions.BackgroundWorker.Abstractions\**\bin\**" Link="Compatibility\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
 </Project>

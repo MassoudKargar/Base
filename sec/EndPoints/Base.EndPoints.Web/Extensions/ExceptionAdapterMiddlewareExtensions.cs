@@ -1,5 +1,5 @@
-﻿using Base.EndPoints.Web.Middlewares;
-using Base.EndPoints.Web.Swagger;
+using Base.EndPoints.Web.Middlewares;
+using Base.EndPoints.Web.Consumers;
 
 namespace Base.EndPoints.Web.Extensions;
 

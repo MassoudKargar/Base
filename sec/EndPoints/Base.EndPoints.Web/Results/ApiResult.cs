@@ -1,12 +1,12 @@
-﻿using Base.Core.Application.Exceptions;
-using Microsoft.OpenApi.Extensions;
+using Base.Core.Application.Exceptions;
+using System.ComponentModel.DataAnnotations;
 namespace Base.EndPoints.Web.Results;
 
 public class ApiResult(bool isSuccess, ApiResultStatusCode statusCode, string? message = null)
 {
     public bool IsSuccess { get; set; } = isSuccess;
     public ApiResultStatusCode StatusCode { get; set; } = statusCode;
-    public string Message { get; set; } = message ?? statusCode.GetDisplayName();
+    public string Message { get; set; } = message ?? (typeof(ApiResultStatusCode).GetField(statusCode.ToString())?.GetCustomAttribute<DisplayAttribute>()?.GetName() ?? statusCode.ToString());
 
     #region Implicit Operators
     public static implicit operator ApiResult(OkResult _) => new(true, ApiResultStatusCode.OK);

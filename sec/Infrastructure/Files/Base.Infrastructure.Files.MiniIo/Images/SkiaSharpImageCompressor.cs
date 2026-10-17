@@ -1,4 +1,7 @@
-﻿using SkiaSharp;
+using SkiaSharp;
+
+using System;
+using System.IO;
 
 namespace Base.Infrastructure.Files.MiniIo.Images;
 public class SkiaSharpImageCompressor : IImageCompressor
@@ -17,10 +20,10 @@ public class SkiaSharpImageCompressor : IImageCompressor
             var imageFormat = ImageHelper.DetectFormat(contentType);
 
             using (var surface = SKSurface.Create(new SKImageInfo(bitmap.Width, bitmap.Height, bitmap.ColorType, bitmap.AlphaType)))
-            using (var paint = new SKPaint() { FilterQuality = SKFilterQuality.Medium })
+            using (var paint = new SKPaint())
             {
                 var canvas = surface.Canvas;
-                canvas.DrawBitmap(bitmap, 0, 0, paint);
+                canvas.DrawBitmap(bitmap, 0, 0, new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear), paint);
                 canvas.Flush();
 
                 switch (imageFormat)

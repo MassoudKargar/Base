@@ -18,10 +18,10 @@
 		<None Include="../../../../base.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="MediatR" Version="14.1.0" />
+		<PackageReference Include="MediatR" Version="14.2.0" />
 		<PackageReference Include="Cronos" Version="0.13.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.13" />
 	</ItemGroup>
 
 </Project>

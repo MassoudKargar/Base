@@ -14,11 +14,7 @@ global using Microsoft.Extensions.Hosting;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Primitives;
 global using Microsoft.IdentityModel.Tokens;
-global using Microsoft.OpenApi.Any;
-global using Microsoft.OpenApi.Models;
 
-global using Swashbuckle.AspNetCore.Swagger;
-global using Swashbuckle.AspNetCore.SwaggerGen;
 
 global using System.Buffers;
 global using System.Buffers.Text;

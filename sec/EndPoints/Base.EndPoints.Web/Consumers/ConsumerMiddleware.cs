@@ -1,4 +1,4 @@
-﻿namespace Base.EndPoints.Web.Swagger;
+namespace Base.EndPoints.Web.Consumers;
 internal class ApiConsumerCheckerMiddleware(RequestDelegate next)
 {
     private const string headerName = "x-consumer";

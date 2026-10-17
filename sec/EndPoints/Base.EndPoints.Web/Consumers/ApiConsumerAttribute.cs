@@ -1,4 +1,4 @@
-﻿namespace Base.EndPoints.Web.Swagger;
+namespace Base.EndPoints.Web.Consumers;
 
 
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]

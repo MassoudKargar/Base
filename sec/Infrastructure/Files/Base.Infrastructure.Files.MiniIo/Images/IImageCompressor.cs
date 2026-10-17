@@ -1,4 +1,6 @@
-﻿namespace Base.Infrastructure.Files.MiniIo.Images;
+﻿using System.IO;
+
+namespace Base.Infrastructure.Files.MiniIo.Images;
 
 public interface IImageCompressor
 {
