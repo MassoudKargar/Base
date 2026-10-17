@@ -1,4 +1,4 @@
-﻿namespace Base.Utilities.Swagger.Registration.Options;
+namespace Base.Utilities.Swagger.Registration.Options;
 
 public class SwaggerSecurityOption
 {
@@ -49,7 +49,7 @@ public class SwaggerSecurityOption
         return security;
     }
 
-    public OpenApiSecurityRequirement ToOpenApiSecurityRequirement()
+    public OpenApiSecurityRequirement ToOpenApiSecurityRequirement(OpenApiDocument? document = null)
     {
         if (string.IsNullOrWhiteSpace(Scheme))
             throw new ArgumentNullException($"SwaggerSecurity{Priority} Scheme is null.");
@@ -57,14 +57,7 @@ public class SwaggerSecurityOption
         return new OpenApiSecurityRequirement
         {
             {
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = Scheme
-                    }
-                },
+                new OpenApiSecuritySchemeReference(Scheme, document),
                 new List<string>()
             }
         };

@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.DependencyInjection;
+namespace Base.Extensions.DependencyInjection;
 
 public static class SwaggerServiceCollectionExtensions
 {
@@ -40,7 +40,7 @@ public static class SwaggerServiceCollectionExtensions
                     option.EnabledSecurities.ForEach(security =>
                     {
                         setup.AddSecurityDefinition(security.Scheme, security.ToOpenApiSecurityScheme());
-                        setup.AddSecurityRequirement(security.ToOpenApiSecurityRequirement());
+                        setup.AddSecurityRequirement(document => security.ToOpenApiSecurityRequirement(document));
                     });
 
                     setup.OperationFilter<SecurityRequirementsOperationFilter>(option);

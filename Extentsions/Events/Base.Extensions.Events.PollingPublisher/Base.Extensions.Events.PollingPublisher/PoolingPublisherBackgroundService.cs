@@ -1,4 +1,4 @@
-﻿namespace Base.Extensions.Events.PollingPublisher;
+namespace Base.Extensions.Events.PollingPublisher;
 
 public class PoolingPublisherBackgroundService : BackgroundService
 {
@@ -27,19 +27,22 @@ public class PoolingPublisherBackgroundService : BackgroundService
                 foreach (var item in outboxItems)
                 {
                     using Activity trace = StartChildActivity(item);
-                   await _sendMessageBus.SendAsync(new Parcel(
-                       item.EventName, 
-                       item.EventPayload,
-                       $"{_options.ApplicationName}.event.{item.EventName}", 
-                       item.AggregateId,
-                       headers: new Dictionary<string, string>
-                       {
-                           ["AccuredByUserId"] = item.AccuredByUserId,
-                           ["AccuredOn"] = item.AccruedOn.ToString(),
-                           ["AggregateName"] = item.AggregateName,
-                           ["AggregateTypeName"] = item.AggregateTypeName,
-                           ["EventTypeName"] = item.EventTypeName,
-                       }));
+                    _sendMessageBus.Send(new Parcel
+                    {
+                        MessageId = item.EventId.ToString(),
+                        CorrelationId = item.AggregateId.ToString(),
+                        MessageName = item.EventName,
+                        MessageBody = item.EventPayload,
+                        Route = $"{_options.ApplicationName}.event.{item.EventName}",
+                        Headers = new Dictionary<string, object>
+                        {
+                            ["AccuredByUserId"] = item.AccuredByUserId,
+                            ["AccuredOn"] = item.AccruedOn.ToString(),
+                            ["AggregateName"] = item.AggregateName,
+                            ["AggregateTypeName"] = item.AggregateTypeName,
+                            ["EventTypeName"] = item.EventTypeName,
+                        }
+                    });
                     item.IsProcessed = true;
                     _logger.LogDebug("event {eventName} with {EventId} sent from {ApplicaotinName} at {DateTime}", item.EventName, item.EventId, _options.ApplicationName, DateTime.Now);
                 }
