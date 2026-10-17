@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="McpServerSettings">
+    <option name="autoStart" value="true" />
+    <option name="debugLoggingEnabled" value="true" />
+    <option name="staticPort" value="true" />
+  </component>
+</project>
