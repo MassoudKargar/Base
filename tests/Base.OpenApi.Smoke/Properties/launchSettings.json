@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Base.OpenApi.Smoke": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:64859;http://localhost:64860"
+    }
+  }
+}
